@@ -1,4 +1,4 @@
 frameworkdelphi
 ===============
 
-Framework complete for desenvolmento quick and easy using the programming model by layers Model view presenter (MVP) having superclasses already being ready all actions database, persistence, validations, instance classes and layouts. Daniel Mirrai
+Complete structure for developers quickly and easily using the programming model by layering Model View Presenter (MVP) with superclasses already be ready all the actions, persistence, validation, database, instance classes and layouts. Daniel Mirrai
