@@ -1,0 +1,56 @@
+unit uConstantUtils;
+
+interface
+uses
+  Classes, Forms, Windows, SysUtils, Messages, Dialogs, uDMUtils;
+
+const
+  cHashKey = 'admin';
+  cSiteCaptureIP = 'http://meuip.datahouse.com.br';
+  //Lista de caracteres especiais
+  cCaracterEspeciais: array[1..38] of string = ('á', 'à', 'ã', 'â', 'ä', 'Á', 'À', 'Ã', 'Â', 'Ä',
+    'é', 'è', 'É', 'È', 'í', 'ì', 'Í', 'Ì',
+    'ó', 'ò', 'ö', 'õ', 'ô', 'Ó', 'Ò', 'Ö', 'Õ', 'Ô',
+    'ú', 'ù', 'ü', 'Ú', 'Ù', 'Ü', 'ç', 'Ç', 'ñ', 'Ñ');
+  //Lista de caracteres para troca
+  cCaracterTroca: array[1..38] of string = ('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A', 'A',
+    'e', 'e', 'E', 'E', 'i', 'i', 'I', 'I',
+    'o', 'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O', 'O',
+    'u', 'u', 'u', 'u', 'u', 'u', 'c', 'C', 'n', 'N');
+  //Lista de Caracteres Extras
+  cCaracterExtra: array[1..30] of string = ('@', '#', '$', '%', '¨', '&', '*',
+    '*', '~', '^', '´', 'ß', 'µ', 'ş',
+    '`', '¨', 'æ', 'Æ', 'ø', '£', 'Ø',
+    'ƒ', 'ª', 'º', '¿', '®', '½', '¼',
+    'ı', 'İ');
+
+
+  cComAcento = 'àâêôûãõáéíóúçüÀÂÊÔÛÃÕÁÉÍÓÚÇÜ©£';
+  cSemAcento = 'aaeouaoaeioucuAAEOUAOAEIOUCU  ';
+
+
+type
+  TConstantUtils = class
+  public
+    class function GetRegistryPath(aForm: TForm): string;
+  end;
+
+var
+  PathRegistry: string;
+  NameSystem: string;
+
+implementation
+
+
+{ TConstantUtils }
+
+class function TConstantUtils.GetRegistryPath(aForm: TForm): string;
+begin
+  if TDMUtils.IsEmpty(NameSystem) then
+    NameSystem := 'System';
+
+  Result := 'Software\' + NameSystem + '\' + aForm.Name + '\' + PathRegistry;
+end;
+
+end.
+
