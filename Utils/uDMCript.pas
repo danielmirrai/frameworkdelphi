@@ -13,7 +13,7 @@
 unit uDMCript;
 
 interface
-uses Sysutils, Forms;
+uses Sysutils, Forms, uConstantUtils;
 const
   cKey = 'keyWorkYUQajda342342423423423423K3LAKDJSL9RTIKJ';
 
@@ -51,7 +51,7 @@ var
   SrcAsc: Integer;
   Range: Integer;
 begin
-  KeyPos := 0;
+  KeyPos := nCST_Zero;
   Range := 256;
   Randomize;
   OffSet := Random(Range);
@@ -63,7 +63,7 @@ begin
     if KeyPos < KeyLen then
       KeyPos := KeyPos + 1
     else
-      KeyPos := 1;
+      KeyPos := nCST_One;
     SrcAsc := SrcAsc xor Ord(Key[KeyPos]);
     Dest := Dest + Format('%1.2x', [SrcAsc]);
     OffSet := SrcAsc;
@@ -78,15 +78,15 @@ var
   SrcAsc: Integer;
   TmpSrcAsc: Integer;
 begin
-  KeyPos := 0;
-  OffSet := TDMUtils.Strtoint2('$' + copy(psSrc, 1, 2));
+  KeyPos := nCST_Zero;
+  OffSet := TDMUtils.Strtoint2('$' + copy(psSrc, nCST_One, 2));
   SrcPos := 3;
   repeat
     SrcAsc := TDMUtils.Strtoint2('$' + copy(psSrc, SrcPos, 2));
     if (KeyPos < KeyLen) then
       KeyPos := KeyPos + 1
     else
-      KeyPos := 1;
+      KeyPos := nCST_One;
     TmpSrcAsc := SrcAsc xor Ord(Key[KeyPos]);
     if TmpSrcAsc <= OffSet then
       TmpSrcAsc := 255 + TmpSrcAsc - OffSet
@@ -94,7 +94,7 @@ begin
       TmpSrcAsc := TmpSrcAsc - OffSet;
     Dest := Dest + Chr(TmpSrcAsc);
     OffSet := SrcAsc;
-    SrcPos := SrcPos + 2;
+    SrcPos := SrcPos + nCST_Two;
   until (SrcPos >= Length(psSrc));
 end;
 
@@ -105,13 +105,13 @@ var
   KeyLen: Integer;
   Dest, Key: string;
 begin
-  if (Src = '') then
+  if (Src = sCST_EmptyStr) then
   begin
-    Result := '';
+    Result := sCST_EmptyStr;
     goto Fim;
   end;
   Key := cKey;
-  Dest := '';
+  Dest := sCST_EmptyStr;
   KeyLen := Length(Key);
   if (Action = UpperCase('C')) then
     SetCrypt(Src, Dest, Key, KeyLen)

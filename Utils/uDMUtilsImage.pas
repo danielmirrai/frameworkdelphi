@@ -15,7 +15,7 @@ unit uDMUtilsImage;
 
 interface
 uses
-  Windows, Classes, Forms, Graphics, jpeg, SysUtils, cxImage, Types, uConstantUtils;
+  Windows, uConstantUtils, Classes, Forms, Graphics, jpeg, SysUtils, cxImage, Types;
 
 type
   TRGBArray = array[Word] of TRGBTriple;
@@ -110,11 +110,11 @@ begin
       vBitmap := TBitmap.Create;
       vBitmap.Width := round(Screen.Width);
       vBitmap.Height := round(Screen.Height);
-      vDC := GetDC(0);
+      vDC := GetDC(nCST_Zero);
       vBitmapCanvas := TCanvas.Create;
       vBitmapCanvas.Handle := vDC;
-      vBitmap.Canvas.CopyRect(Rect(0, 0, vBitmap.Width, vBitmap.Height),
-        vBitmapCanvas, Rect(0, 0, Screen.Width, Screen.Height));
+      vBitmap.Canvas.CopyRect(Rect(0, nCST_Zero, vBitmap.Width, vBitmap.Height),
+        vBitmapCanvas, Rect(0, nCST_Zero, Screen.Width, Screen.Height));
 
       vJpg := TJPEGImage.Create;
       vJpg.Assign(vBitmap);
@@ -126,11 +126,8 @@ begin
 
       SetJPGCompression(40, aFileName, aFileName);
     except
-      on E: Exception do
-      begin
-        TDMUtils.MyException(sCST_ErrorSavingImage, True);
-        exit;
-      end;
+      TDMUtils.MyException(sCST_ErrorSavingImage, True);
+      exit;
     end;
   finally
     TDMUtils.DestroyObject(vBitmapCanvas);
@@ -309,8 +306,7 @@ begin
         else
           RenameFile(ChangeFileExt(aFileName, '.$$$'), aFileName);
       except
-        on E: Exception do
-          Assert(False, e.Message);
+        TDMUtils.MyException('Resize Image');
       end;
     finally
       TDMUtils.DestroyObject(vOldBitmap);
@@ -378,7 +374,7 @@ begin
 
   if iCompression = nCST_Zero then
 
-    iCompression := 1;
+    iCompression := nCST_One;
 
   if iCompression > 100 then
 

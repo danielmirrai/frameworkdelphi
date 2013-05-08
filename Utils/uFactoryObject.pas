@@ -15,7 +15,7 @@ unit uFactoryObject;
 
 interface
 uses
-  uObjectActionCustom, classes, uObjectDaoCustom;
+  uObjectActionCustom, uConstantUtils, classes, uObjectDaoCustom;
 
 type
   TFactoryObject = class
@@ -43,7 +43,6 @@ end;
 class function TFactoryObject.CreateObject(aClassObjectAction: TClassObjectActionCustom; aOwner: TComponent): TObjectActionCustom;
 begin
   Result := TFactoryObject.CreateObject(aClassObjectAction);
-  Result.Owner := aOwner;
 end;
 
 end.

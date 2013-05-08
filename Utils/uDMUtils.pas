@@ -5,7 +5,7 @@
 {                Senior Delphi Programmer                   }
 {             E-mail: danielmirrai@gmail.com                }
 {                   Skype: danielmirrai                     }
-{          Phones: +55 (51) 9413-3725 / 3111-2388           }
+{          Phones: +55 (5nCST_One) 9413-3725 / 3111-2388           }
 {         http://www.linkedin.com/in/danielmirrai           }
 {          https://www.facebook.com/danielmirrai            }
 {                   www.danielmirrai.com                    }
@@ -15,7 +15,7 @@ unit uDMUtils;
 
 interface
 uses
-  SysUtils, Classes, Forms, Windows, DateUtils, XMLDoc, ShellAPI, Controls, Variants, uConstantUtils;
+  SysUtils, uConstantUtils, Classes, Forms, Windows, DateUtils, XMLDoc, ShellAPI, Controls, Variants, db;
 
 type
   TDMUtils = class
@@ -30,6 +30,7 @@ type
     class function DeleteFile2(const psFileName: TStringList): Boolean; overload;
 
     class function IsEmpty(const psValue: Extended): Boolean; overload;
+    class function IsEmpty(const poField: TField): Boolean; overload;
     class function IsEmpty(const poValue: array of Extended): Boolean; overload;
     class function IsEmpty(const poValue: array of string): Boolean; overload;
     class function IsEmpty(const psValue: string): Boolean; overload;
@@ -60,7 +61,7 @@ type
     class function FormatDate2(const pdDate: TDateTime): string;
     class function StrToDateTime2(const pdDate: string): TDateTime; overload;
     class function StrToDateTime2(const psFormat, pdDate: string): TDateTime; overload;
-    class function FormpoTextended(const psValue: Extended): string;
+    class function FormatExtended(const psValue: Extended): string;
     class function FormatInteger(const psValue: Integer): string;
     class function SizeFile(const psFileName: string): Integer;
     class procedure CreateDirectory(const psDirectory: string);
@@ -77,10 +78,10 @@ type
     class function StreamToString(const poStream: TStream): string;
     class function FindWindowByTitle(const psWindowTitle: string): Hwnd;
     class function XMLSaveToFile(const psFileName, psXML: string): Boolean;
+    class function FormatXMLData2(const psXML: String): String;
     class function FormatSize(const pnSize: Extended): string;
     class function LocateStr(const poLocate: array of string; const psText: string): Boolean; Overload;
     class function LocateStr(const psLocate, psText: string): Boolean; Overload;
-    class function FormatXMLData2(const psXML: string): string;
     class function GetXML(const psXML: string): TXMLDocument;
     class function RemoveEnter(const psText: string): string;
     class function ExtractWindowsDir: string;
@@ -91,13 +92,14 @@ type
     class function GetDirectoryTemp: string;
     class procedure FreeAplication;
     class function ExtractDrive(const psPath: string): string;
-    class procedure MyException(var poSender: TObject); overload;
+    class procedure MyException(const poSender: TObject); overload;
+    class procedure MyException(poSender: TObject; E: Exception); overload;
     class procedure MyException(const psMessage: string; const pbShowError: Boolean = False); overload;
     class function GetMessageException: String;
     class function UpperCaseFirst(const psText: string): string;
     class function CompareIgnoreCase(const psText, psTextCompare: string): Boolean;
     class function ReadFile(const psFilePath: string): TStringList;
-    class function WriteFile(const psFilePath: string; var poText: TStringList): Boolean;
+    class function WriteFile(const psFilePath: string; var poText: TStringList; const pbClearFile: Boolean = False): Boolean;
     class function IsInteger(const poValue: Variant): Boolean;
     class function IsFloat(const poValue: variant): Boolean;
     class procedure FocusSet(poComponent: TWinControl; const pbDesabilite: Boolean = False);
@@ -105,6 +107,10 @@ type
 
     class function ValidateEmail(const psEmail: string): Boolean;
     class function InString(const psValue: String; const poList: array of String): Boolean;
+    class function VarValidate(const poVariant: Variant): Boolean;
+    class function VarToStr2(const poVariant: Variant): String;
+    class function VarToInt(const poVariant: Variant): Integer;
+
   end;
 implementation
 
@@ -148,11 +154,8 @@ begin
       poFile.Text := psText;
       poFile.SaveToFile(psFileName);
     except
-      on E: Exception do
-      begin
-        Result := False;
-        MyException(sCST_ErrorCreatingFile, False);
-      end;
+      Result := False;
+      MyException(sCST_ErrorCreatingFile, False);
     end;
   finally
     TDMUtils.DestroyObject(poFile);
@@ -184,8 +187,7 @@ begin
       SysUtils.FindClose(vSearchRec);
     end;
   except
-    on E: Exception do
-      MyException('Erro ao excluír arquivos', True);
+    MyException(sCST_ErroDeletingFile, True);
   end;
 end;
 
@@ -218,8 +220,7 @@ begin
       end;
     end;
   except
-    on E: Exception do
-      MyException('Erro ao excluír diretório.', True);
+    MyException(sCST_ErroDeletingDirectory, True);
   end;
 end;
 
@@ -246,31 +247,25 @@ begin
     if FileExists(Trim(psFileName)) then
       DeleteFile(PChar(Trim(psFileName)));
   except
-    on E: Exception do
-    begin
-      Result := False;
-      MyException('Erro ao excluír o arquivo!', True);
-      exit;
-    end;
+    Result := False;
+    MyException(sCST_ErroDeletingFile, True);
+    exit;
   end;
 end;
 
 class function TDMUtils.ExecuteBat(const psFileName: string): Boolean;
 const
-  sCST_ErroExecutingFile = 'Error executing file!';
   nCST_ExecuteSucessful = 32;
-  sCST_Open = 'open';
 begin
+  Application.ProcessMessages;
+  Result := False;
   try
-    Result := False;
     if FileExists2(psFileName) then
-      Result := ShellExecute(Application.Handle, sCST_Open, PChar(psFileName), PChar(EmptyStr), PChar(EmptyStr), SW_hide) = nCST_ExecuteSucessful;
+      Result := ShellExecute(Application.Handle, PChar(sCST_Open), PChar(psFileName), PChar(sCST_EmptyStr), PChar(sCST_EmptyStr), SW_HIDE) = nCST_ExecuteSucessful;
   except
-    on E: Exception do
-    begin
-      TDMUtils.MyException(sCST_ErroExecutingFile);
-    end;
+    TDMUtils.MyException(sCST_ErroExecutingFile);
   end;
+  Application.ProcessMessages;
 end;
 
 class function TDMUtils.Explode(const psText, psExplode: string): TStringList;
@@ -285,8 +280,8 @@ begin
   nIndex := Pos(psExplode, sText);
   while (nIndex <> nCST_Zero) do
   begin
-    sExplode := Copy(sText, 1, nIndex - 1);
-    sText := Copy(sText, nIndex + 1, Length(sText));
+    sExplode := Copy(sText, nCST_One, nIndex - nCST_One);
+    sText := Copy(sText, nIndex + nCST_One, Length(sText));
     Result.Add(sExplode);
     nIndex := Pos(psExplode, sText);
     if (nIndex = nCST_Zero) then
@@ -294,7 +289,7 @@ begin
       if (not TDMUtils.IsEmpty(sText)) then
         Result.Add(sText);
 
-      sText := EmptyStr;
+      sText := sCST_EmptyStr;
     end;
   end;
 
@@ -307,9 +302,9 @@ var
   vIndex: Integer;
 begin
   vIndex := Pos(sCST_BeginDrive, psPath);
-  Result := EmptyStr;
+  Result := sCST_EmptyStr;
   if (vIndex > nCST_Zero) then
-    Result := Copy(psPath, 1, vIndex + 1);
+    Result := Copy(psPath, nCST_One, vIndex + nCST_One);
 end;
 
 class function TDMUtils.ExtractSystemDir: string;
@@ -418,7 +413,7 @@ begin
   else
     Result := 'B';
   end;
-  Result := TDMUtils.IntToStr2(TDMUtils.FloatToInt2(sSize)) + ' ' + Result;
+  Result := TDMUtils.IntToStr2(TDMUtils.FloatToInt2(sSize)) + sCST_Space + Result;
 end;
 
 class function TDMUtils.FormatValue(const psFormat: string; const psValue: Extended): string;
@@ -450,15 +445,15 @@ begin
       vText.Add('Echo off');
       vDirectory := GetDirectoryTemp;
 
-      if (Copy(vDirectory, Length(vDirectory), 1) = '\') then
-        vDirectory := Copy(vDirectory, 1, Length(vDirectory) - 1);
+      if (Copy(vDirectory, Length(vDirectory), nCST_One) = sCST_Backslash) then
+        vDirectory := Copy(vDirectory, nCST_One, Length(vDirectory) - nCST_One);
 
-      vText.Add('cacls "' + vDirectory + '" /E /G "Todos":F');
+      vText.Add('cacls "' + vDirectory + '" /E /G "All":F');
 
       vDirectory := ExtractFilePath(Application.ExeName);
 
-      if (Copy(vDirectory, Length(vDirectory), 1) = '\') then
-        vDirectory := Copy(vDirectory, 1, Length(vDirectory) - 1);
+      if (Copy(vDirectory, Length(vDirectory), nCST_One) = sCST_Backslash) then
+        vDirectory := Copy(vDirectory, nCST_One, Length(vDirectory) - nCST_One);
       vText.Add('cacls "' + vDirectory + '" /E /G "Todos":F');
       vText.Add('exit;');
       TDMUtils.CreateFile(vFile, vText.Text);
@@ -466,7 +461,7 @@ begin
       Sleep(nCST_two);
       TDMUtils.DeleteFile2(vFile)
     except
-      TDMUtils.MyException('Erro ao criar arquivo de permissão!', False);
+      TDMUtils.MyException(sCST_ErrorCreatingFilePermission, False);
     end;
   finally
     TDMUtils.DestroyObject(vText);
@@ -491,14 +486,14 @@ begin
   Result.Active := True;
 end;
 
-class function TDMUtils.FormpoTextended(const psValue: Extended): string;
-begin
-  Result := FormatValue('###,##0.00', psValue);
+class function TDMUtils.FormatExtended(const psValue: Extended): string;
+begin                                      
+  Result := FormatValue(sCST_FormatExtended, psValue);
 end;
 
 class function TDMUtils.FormatDate2(const pdDate: TDateTime): string;
 begin
-  Result := FormatDateTime('dd/mm/yyyy', pdDate);
+  Result := FormatDateTime(sCST_FormatDate, pdDate);
 end;
 
 class function TDMUtils.FormatDateTime2(const psFormat: string; const pdDate: TDateTime): string;
@@ -509,7 +504,7 @@ end;
 class function TDMUtils.FormatDirectory(const psDirectory: string): string;
 begin
   Result := psDirectory;
-  if (Copy(Result, Length(Result), 1) <> '\') then
+  if (Copy(Result, Length(Result), nCST_One) <> '\') then
     Result := Result + '\';
 end;
 
@@ -534,7 +529,7 @@ end;
 
 class function TDMUtils.IIf(const pbCondition: Boolean; const psReturnTrue: string): string;
 begin
-  Result := EmptyStr;
+  Result := sCST_EmptyStr;
   if (pbCondition) then
     Result := psReturnTrue;
 end;
@@ -574,7 +569,7 @@ end;
 
 class function TDMUtils.IsEmpty(const psValue: string): Boolean;
 begin
-  Result := (Trim(psValue) = EmptyStr);
+  Result := (Trim(psValue) = sCST_EmptyStr);
 end;
 
 class function TDMUtils.IsFloat(const poValue: variant): Boolean;
@@ -586,11 +581,11 @@ begin
   nIndex := Pos(',', sValue);
   if (Length(sValue) > nIndex) then
   begin
-    sDecimal := Copy(sValue, 1, nIndex - 1);
+    sDecimal := Copy(sValue, nCST_One, nIndex - nCST_One);
     Result := IsInteger(sDecimal);
     if Result then
     begin
-      sDecimal := Copy(sValue, nIndex + 1, Length(sValue));
+      sDecimal := Copy(sValue, nIndex + nCST_One, Length(sValue));
       Result := IsInteger(sDecimal);
     end;
   end
@@ -636,8 +631,7 @@ begin
       end;
     end;
   except
-    on E: Exception do
-      MyException('Erro ao excluír arquivos', True);
+    MyException(sCST_ErroDeletingFile, True);
   end;
 end;
 
@@ -646,17 +640,15 @@ begin
   Result := (Pos(UpperCase(psLocate), UpperCase(psText)) > nCST_Zero);
 end;
 
-class procedure TDMUtils.MyException(var poSender: TObject);
+class procedure TDMUtils.MyException(const poSender: TObject);
 begin
-  TDMUtils.MyException('Error in '+poSender.ClassName, True);
+  TDMUtils.MyException(sCST_ErrorIn + poSender.ClassName, True);
 end;
 
 class function TDMUtils.ReadFile(const psFilePath: string): TStringList;
 var
   oTextFile: TextFile;
   sLine: string;
-const
-  sCST_ErroWritingFile = 'Error writing file read!';
 begin
   Result := TStringList.Create;
   try
@@ -677,12 +669,9 @@ begin
       end;
     end;
   except
-    on E: Exception do
-    begin
-      TDMUtils.MyException(sCST_ErroWritingFile, False);
-      TDMUtils.DestroyObject(Result);
-      exit;
-    end;
+    TDMUtils.MyException(sCST_ErroWritingFile, False);
+    TDMUtils.DestroyObject(Result);
+    exit;
   end;
 end;
 
@@ -709,7 +698,7 @@ begin
   Result := psText;
   try
     for vIndex := nCST_Zero to vList.Count - nCST_One do
-      Result := StringReplace(Result, vList.Strings[vIndex], EmptyStr, [rfReplaceAll]);
+      Result := StringReplace(Result, vList.Strings[vIndex], sCST_EmptyStr, [rfReplaceAll]);
   finally
     TDMUtils.DestroyObject(vList);
   end;
@@ -727,7 +716,7 @@ var
 begin
   Result := psText;
   for vIndex := nCST_Zero to high(aCaracter) do
-    Result := StringReplace(Result, aCaracter[vIndex], EmptyStr, [rfReplaceAll]);
+    Result := StringReplace(Result, aCaracter[vIndex], sCST_EmptyStr, [rfReplaceAll]);
 end;
 
 class function TDMUtils.RemoveEnter(const psText: string): string;
@@ -748,11 +737,8 @@ begin
         vFileStream := TFileStream.Create(psFileName, fmShareDenyNone);
         Result := vFileStream.Size;
       except
-        on E: Exception do
-        begin
-          Result := nCST_Zero;
-          MyException('Erro ao obter tamanho do arquivo!', True);
-        end;
+        Result := nCST_Zero;
+        MyException(sCST_ErrorGettingFileSize, True);
       end;
     finally
       DestroyObject(vFileStream);
@@ -765,10 +751,7 @@ begin
   try
     Result := StrToDateTime(pdDate);
   except
-    on E: Exception do
-    begin
-      Result := nCST_Zero;
-    end;
+    Result := nCST_Zero;
   end;
 end;
 
@@ -787,8 +770,8 @@ var
     if (vIndex > nCST_Zero) then
     begin
       Result := TDMUtils.StrToInt2(Copy(sDate, vIndex, length(aStr)));
-      sFormat := Copy(sFormat, 1, vIndex - 1) + Copy(sFormat, vIndex + length(aStr), length(sFormat));
-      sDate := Copy(sDate, 1, vIndex - 1) + Copy(sDate, vIndex + length(aStr), length(sDate));
+      sFormat := Copy(sFormat, nCST_One, vIndex - nCST_One) + Copy(sFormat, vIndex + length(aStr), length(sFormat));
+      sDate := Copy(sDate, nCST_One, vIndex - nCST_One) + Copy(sDate, vIndex + length(aStr), length(sDate));
     end;
   end;
 begin
@@ -815,7 +798,7 @@ begin
   end;
 end;
 
-class function TDMUtils.WriteFile(const psFilePath: string; var poText: TStringList): Boolean;
+class function TDMUtils.WriteFile(const psFilePath: string; var poText: TStringList; const pbClearFile: Boolean): Boolean;
 var
   vArq: TextFile;
   vIndex: Integer;
@@ -824,7 +807,7 @@ begin
     Result := True;
     try
       AssignFile(vArq, psFilePath);
-      if FileExists(psFilePath) then
+      if FileExists(psFilePath) and (not pbClearFile) then
         Append(vArq)
       else
       begin
@@ -833,12 +816,9 @@ begin
       for vIndex := nCST_Zero to poText.Count - nCST_One do
         WriteLn(vArq, poText[vIndex]);
     except
-      on E: Exception do
-      begin
-        TDMUtils.MyException('Erro ao gravar dados no arquivo');
-        Result := False;
-        exit;
-      end;
+      TDMUtils.MyException(sCST_ErrorWritingDataToFile);
+      Result := False;
+      exit;
     end;
   finally
     CloseFile(vArq);
@@ -855,16 +835,13 @@ begin
     try
       TDMUtils.DeleteFile2(psFileName);
       vDoc := TXMLDocument.Create(nil);
-      vDoc.XML.Text := psXML;
+      vDoc.XML.Text := FormatXMLData2(psXML);
       vDoc.Active := True;
       vDoc.SaveToFile(psFileName);
     except
-      on E: Exception do
-      begin
-        Result := False;
-        MyException('Erro ao salva arquivo!', True);
-        exit;
-      end;
+      Result := False;
+      MyException('Erro ao salva arquivo!', True);
+      exit;
     end;
   finally
     TDMUtils.DestroyObject(vDoc);
@@ -881,7 +858,7 @@ begin
 
   if (pbLimExt) then
     for vIndex := nCST_One to 30 do
-      Result := StringReplace(Result, cCaracterExtra[vIndex], EmptyStr, [rfreplaceall]);
+      Result := StringReplace(Result, cCaracterExtra[vIndex], sCST_EmptyStr, [rfreplaceall]);
 end;
 
 class function TDMUtils.IsEmpty(const psValue: Extended): Boolean;
@@ -905,16 +882,16 @@ begin
       WriteLn(vArq, TDMCript.Encrypts(sCST_TitleLog));
     end;
 
-    sException := GetMessageException;
+    sException := psMessage + sCST_Space + GetMessageException;
     if TDMUtils.ExistValue(sException) then
       sMessage := sMessage + sCST_Space + sCST_MessageError + sException;
 
-    WriteLn(vArq, TDMUtils.FormatDateTime2(Now) + sCST_TraceSpaces + sMessage);
+    WriteLn(vArq, TDMUtils.FormatDateTime2(Now) + sCST_TraceSpaces + Trim(sMessage));
 
     CloseFile(vArq);
 
     if pbShowError then
-      TDMUtilsMessage.ShowMessageError(sMessage);
+      TDMUtilsMessage.ShowMessageError(Trim(sMessage));
   except
     exit;
   end;
@@ -933,7 +910,7 @@ class function TDMUtils.StreamToString(const poStream: TStream): string;
 var
   ms: TMemoryStream;
 begin
-  Result := EmptyStr;
+  Result := sCST_EmptyStr;
   ms := TMemoryStream.Create;
   try
     ms.LoadFromStream(poStream);
@@ -979,7 +956,7 @@ var
 begin
   for nIndex := nCST_Zero to high(poValue) do
   begin
-    poValue[nIndex] := EmptyStr;
+    poValue[nIndex] := sCST_EmptyStr;
   end;
 end;
 
@@ -1015,14 +992,11 @@ end;
 
 class function TDMUtils.ValidateEmail(const psEmail: string): Boolean;
 const
-  // Caracteres válidos
   ATOM_CHARS = [#33..#255] - ['(', ')', '<', '>', '@', ',', ';', ':',
                               '\', '/', '"', '.', '[', ']', #127];
 
-  // Caracteres válidos em uma cadeia
   QUOTED_STRING_CHARS = [#0..#255] - ['"', #13, '\'];
 
-  // Caracteres válidos em um subdominio
   LETTERS = ['A'..'Z', 'a'..'z'];
   LETTERS_DIGITS = ['0'..'9', 'A'..'Z', 'a'..'z'];
   SUBDOMAIN_CHARS = ['-', '0'..'9', 'A'..'Z', 'a'..'z'];
@@ -1038,8 +1012,8 @@ var
 begin
   State := STATE_BEGIN;
   n := Length(psEmail);
-  i := 1;
-  iSubdomains := 1;
+  i := nCST_One;
+  iSubdomains := nCST_One;
   while (i <= n) do
   begin
     c := psEmail[i];
@@ -1110,7 +1084,7 @@ begin
   else
     Result := (State = STATE_SUBDOMAIN) and (iSubdomains >= nCST_two);
 
-  if psEmail = EmptyStr then
+  if psEmail = sCST_EmptyStr then
     Result := true;
 end;
 
@@ -1165,7 +1139,7 @@ end;
 
 class function TDMUtils.GetMessageException: String;
 begin
-  Result := EmptyStr;
+  Result := sCST_EmptyStr;
   if ExceptObject is Exception then
     Result := Exception(ExceptObject).Message
 end;
@@ -1178,6 +1152,36 @@ end;
 class function TDMUtils.UpperCaseFirst(const psText: string): string;
 begin
   Result := upperCase(Copy(psText, nCST_One, nCST_One)) + Copy(psText, nCST_two, length(psText));
+end;
+
+class function TDMUtils.VarValidate(const poVariant: Variant): Boolean;
+begin
+  Result := not (VarIsNull(poVariant) and VarIsEmpty(poVariant));
+end;
+
+class function TDMUtils.VarToStr2(const poVariant: Variant): String;
+begin
+  Result := sCST_EmptyStr;
+  if VarValidate(poVariant) then
+    Result := VarToStr(poVariant);
+end;
+
+class function TDMUtils.VarToInt(const poVariant: Variant): Integer;
+begin
+  Result := StrToInt2(VarToStr2(poVariant));
+end;
+
+class procedure TDMUtils.MyException(poSender: TObject; E: Exception);
+begin
+  TDMUtils.MyException(sCST_ErrorIn + poSender.ClassName, True);
+end;
+
+class function TDMUtils.IsEmpty(const poField: TField): Boolean;
+begin
+  if (poField.DataType in [ftInteger, ftFloat, ftCurrency, ftDateTime, ftTimeStamp]) then
+    Result := TDMUtils.IsEmpty(poField.AsFloat)
+  else
+    Result := TDMUtils.IsEmpty(poField.AsString);
 end;
 
 end.

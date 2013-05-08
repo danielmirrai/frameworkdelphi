@@ -15,7 +15,7 @@ unit uDMFileInfoUtils;
 
 interface
 uses
-  Classes, Windows, SysUtils, uDMUtils, Contnrs;
+  Classes, Windows, SysUtils, uDMUtils, Contnrs, uConstantUtils;
 
 const
   Key: array[1..9] of string = ('CompanyName',
@@ -147,21 +147,21 @@ end;
 
 procedure TDMFileInfoUtils.Clear;
 begin
-  FCompanyName := '';
-  FFileDescription := '';
-  FFileVersion := '';
-  FInternalName := '';
-  FLegalCopyright := '';
-  FOriginalFilename := '';
-  FProductName := '';
-  FProductVersion := '';
-  FComments := '';
-  FAttribute := '';
-  FTypeFile := '';
-  FOS := '';
-  FFileName := '';
-  FNameValidate := '';
-  FMD5 := '';
+  FCompanyName := sCST_EmptyStr;
+  FFileDescription := sCST_EmptyStr;
+  FFileVersion := sCST_EmptyStr;
+  FInternalName := sCST_EmptyStr;
+  FLegalCopyright := sCST_EmptyStr;
+  FOriginalFilename := sCST_EmptyStr;
+  FProductName := sCST_EmptyStr;
+  FProductVersion := sCST_EmptyStr;
+  FComments := sCST_EmptyStr;
+  FAttribute := sCST_EmptyStr;
+  FTypeFile := sCST_EmptyStr;
+  FOS := sCST_EmptyStr;
+  FFileName := sCST_EmptyStr;
+  FNameValidate := sCST_EmptyStr;
+  FMD5 := sCST_EmptyStr;
 end;
 
 function TDMFileInfoUtils.GetAttribute: string;
@@ -196,7 +196,7 @@ end;
 
 function TDMFileInfoUtils.GetFlags(const poFileFlags: DWord): string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   Result := TDMUtils.IIf((poFileFlags = VS_FF_DEBUG), Concat(Result, '*Debug* '), Result);
   Result := TDMUtils.IIf((poFileFlags = VS_FF_SPECIALBUILD), Concat(Result, '*Special Build* '), Result);
   Result := TDMUtils.IIf((poFileFlags = VS_FF_PRIVATEBUILD), Concat(Result, '*Private Build* '), Result);
@@ -247,7 +247,7 @@ end;
 
 function TDMFileInfoUtils.GetTargetSO(const poFileOS: DWORD): string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   case poFileOS of
     VOS_UNKNOWN: Result := Concat(Result, 'Desconhecido');
     VOS_DOS: Result := Concat(Result, 'MS-DOS');
@@ -263,7 +263,7 @@ end;
 
 function TDMFileInfoUtils.GetTypeArq(const poFileType, poFileSubtype: DWORD): string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   case poFileType of
     VFT_UNKNOWN: Result := Concat(Result, 'Desconhecido');
     VFT_APP: Result := Concat(Result, 'Aplicacao');
@@ -362,13 +362,13 @@ begin
   begin
     GetMem(vBuffer, Succ(vBufferSize));
     try
-      if GetFileVersionInfo(PChar(aFileName), 0, vBufferSize, vBuffer) then
+      if GetFileVersionInfo(PChar(aFileName), nCST_Zero, vBufferSize, vBuffer) then
       begin
         if VerQueryValue(vBuffer, '\VarFileInfo\Translation', vTranslate, UINT(vLen)) then
         begin
           SetListDescriptionFileInfo(vTranslate, vBuffer, vLen);
 
-          if VerQueryValue(vBuffer, '', vFixedFileInfo, UINT(vLen)) then
+          if VerQueryValue(vBuffer, PChar(sCST_EmptyStr), vFixedFileInfo, UINT(vLen)) then
             with TVSFixedFileInfo(vFixedFileInfo^) do
             begin
               vFlags := GetFlags(dwFileFlags);

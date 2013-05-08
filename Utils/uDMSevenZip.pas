@@ -16,7 +16,7 @@ unit uDMSevenZip;
 interface
 
 uses
-  SevenZipVCL, Classes, Dialogs, SysUtils, cxProgressBar, cxLabel, Windows, Forms;
+  SevenZipVCL, uConstantUtils, Classes, Dialogs, SysUtils, cxProgressBar, cxLabel, Windows, Forms;
 
 type
   TDMSevenZip = class
@@ -137,8 +137,8 @@ begin
   FSevenZip.LZMACompressStrength  := NORMAL;
   FSevenZip.LZMACompressType      := LZMA;
   FSevenZip.SFXCreate             := False;
-  SetZipName('');
-  FSevenZip.Password := '';
+  SetZipName(sCST_EmptyStr);
+  FSevenZip.Password := sCST_EmptyStr;
 end;
 
 function TDMSevenZip.Extract(aFileName, aDirectoryNew: String): Boolean;
@@ -158,7 +158,7 @@ begin
   //extract files
   vReturn := FSevenZip.Extract;
 
-  Result := vReturn > 0;
+  Result := vReturn > nCST_Zero;
 end;
 
 function TDMSevenZip.OpenFile(aDirectory: String): Boolean;
@@ -200,7 +200,7 @@ begin
 
   if Assigned(FProgressBar) then
   begin
-    Fprogressbar.Position       := 0;
+    Fprogressbar.Position       := nCST_Zero;
     FProgressBar.Properties.Max := Filesize;
   end;
 end;
@@ -214,7 +214,7 @@ begin
 
   if Assigned(FProgressBar) then
   begin
-    FProgressBar.position       := 0;
+    FProgressBar.position       := nCST_Zero;
     FProgressBar.Properties.Max := filesize;
   end;
 end;

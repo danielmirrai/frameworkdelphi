@@ -15,7 +15,7 @@ unit uDMHTTP;
 
 interface
 uses
-  IdBaseComponent, IdMultipartFormData, SysUtils,
+  IdBaseComponent, IdMultipartFormData, SysUtils, uConstantUtils,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, Classes, forms;
 
 type
@@ -67,7 +67,7 @@ type
   end;
 implementation
 
-uses uDMUtils, uDMUtilsVariant, MD5, uConstantUtils;
+uses uDMUtils, MD5;
 
 { TDMHTTP }
 
@@ -112,7 +112,7 @@ end;
 
 function TDMHTTP.AddHash(aNameFieldHash: string): string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   SetHashParamsFields(Result);
 
   SetHashParamsFiles(Result);
@@ -132,7 +132,7 @@ begin
     if not TDMUtils.IsEmpty(psHashFields) then
       psHashFields := psHashFields + '!';
 
-    psHashFields := psHashFields + TDMUtilsVariant.FormatValue(psFieldValue);
+    psHashFields := psHashFields + psFieldValue;
   end;
 end;
 
@@ -178,7 +178,7 @@ begin
 
   if Assigned(FListFileContentTypeParams) then
     FListFileContentTypeParams.Clear;
-  FURL := '';
+  FURL := sCST_EmptyStr;
 end;
 
 procedure TDMHTTP.IdHTTPStatus(ASender: TObject; const AStatus: TIdStatus;
@@ -238,7 +238,6 @@ procedure TDMHTTP.SetInsertParamsFields(poData: TIdMultiPartFormDataStream);
 var
   nIndex: Integer;
 begin
-  //{$REGION 'Insert params Fields'}
   if ((Assigned(FListFieldNameParams) and Assigned(FListFieldValueParams)) and
     (FListFieldNameParams.Count = FListFieldValueParams.Count)) then
   begin
@@ -248,14 +247,12 @@ begin
         poData.AddFormField(FListFieldNameParams.Strings[nIndex], FListFieldValueParams.Strings[nIndex]);
     end;
   end;
-  //{$ENDREGION}
 end;
 
 procedure TDMHTTP.SetInsertParamsFiles(poData: TIdMultiPartFormDataStream);
 var
   nIndex: Integer;
 begin
-  //{$REGION 'Insert params Files'}
   if ((Assigned(FListFileNameParams) and Assigned(FListFileValueParams) and (Assigned(FListFileContentTypeParams))) and
     (FListFileNameParams.Count = FListFileValueParams.Count) and (FListFileValueParams.Count = FListFileContentTypeParams.Count)) then
   begin
@@ -265,7 +262,6 @@ begin
         poData.AddFile(FListFileNameParams.Strings[nIndex], FListFileValueParams.Strings[nIndex], FListFileContentTypeParams.Strings[nIndex]);
     end;
   end;
-  //{$ENDREGION}
 end;
 
 procedure TDMHTTP.SetListFieldNameParams(const Value: TStringList);
@@ -300,8 +296,8 @@ var
   vSucess: Boolean;
 begin
   try
-    Result := '';
-    vIndex := 0;
+    Result := sCST_EmptyStr;
+    vIndex := nCST_Zero;
     vSucess := False;
     while ((vIndex < 3) and (not vSucess)) do
     begin
@@ -309,11 +305,8 @@ begin
         vSucess := True;
         Result := Get(FURL);
       except
-        on E: Exception do
-        begin
-          vSucess := False;
-          Inc(vIndex);
-        end;
+        vSucess := False;
+        Inc(vIndex);
       end;
     end;
   finally
@@ -327,7 +320,7 @@ var
   vIndex: Integer;
   vSucess: Boolean;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   aData := nil;
   try
     try
@@ -336,7 +329,7 @@ begin
       SetInsertParamsFields(aData);
       SetInsertParamsFiles(aData);
 
-      vIndex := 0;
+      vIndex := nCST_Zero;
       vSucess := False;
       while ((vIndex < 3) and (not vSucess)) do
       begin
@@ -344,20 +337,14 @@ begin
           vSucess := True;
           Result := Post(FURL, aData);
         except
-          on E: Exception do
-          begin
-            vSucess := False;
-            Inc(vIndex);
-          end;
+          vSucess := False;
+          Inc(vIndex);
         end;
       end;
 
     except
-      on E: Exception do
-      begin
-        Result := '';
-        Assert(False, e.Message);
-      end;
+      Result := sCST_EmptyStr;
+      TDMUtils.MyException('Send data http');
     end;
   finally
     TdmUtils.DestroyObject(aData);

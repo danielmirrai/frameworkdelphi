@@ -14,7 +14,7 @@
 unit uDMList;
 
 interface
-uses Classes, Contnrs;
+uses Classes, Contnrs, uConstantUtils;
 
 type
   TListStringList = class(TObjectList)

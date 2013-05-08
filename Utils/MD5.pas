@@ -14,7 +14,7 @@ unit md5;
 
 interface
 
-uses SysUtils, Classes;
+uses SysUtils, Classes, uConstantUtils;
 
 type
   { The TMD5Digest record is the type of results of
@@ -133,9 +133,9 @@ const
 
 var
   Padding: TArray64Byte =
-  ($80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  ($80, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero,
+    nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero,
+    nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero, nCST_Zero);
 
 function _F(x, y, z: UINT4): UINT4;
 begin
@@ -194,8 +194,8 @@ procedure MD5Encode(Output: PByteArray; Input: PUINT4Array; Len: LongWord);
 var
   i, j: LongWord;
 begin
-  j := 0;
-  i := 0;
+  j := nCST_Zero;
+  i := nCST_Zero;
   while j < Len do
   begin
     output[j] := Byte(input[i] and $FF);
@@ -211,8 +211,8 @@ procedure MD5Decode(Output: PUINT4Array; Input: PByteArray; Len: LongWord);
 var
   i, j: LongWord;
 begin
-  j := 0;
-  i := 0;
+  j := nCST_Zero;
+  i := nCST_Zero;
   while j < Len do
   begin
     Output[i] := UINT4(input[j]) or (UINT4(input[j + 1]) shl 8) or
@@ -314,12 +314,12 @@ begin
   Inc(State[2], c);
   Inc(State[3], d);
 
-  MD5_memset(PByteArray(@x), 0, SizeOf(x));
+  MD5_memset(PByteArray(@x), nCST_Zero, SizeOf(x));
 end;
 
 procedure MD5Init(var Context: TMD5Context);
 begin
-  FillChar(Context, SizeOf(Context), 0);
+  FillChar(Context, SizeOf(Context), nCST_Zero);
   Context.state[0] := $67452301;
   Context.state[1] := $EFCDAB89;
   Context.state[2] := $98BADCFE;
@@ -346,10 +346,10 @@ begin
       MD5Transform(@Context.state, PArray64Byte(@Input[i]));
       Inc(i, 64);
     end;
-    index := 0;
+    index := nCST_Zero;
   end
   else
-    i := 0;
+    i := nCST_Zero;
   MD5_memcpy(PByteArray(@Context.buffer[index]), PByteArray(@Input[i]), inputLen - i);
 end;
 
@@ -367,14 +367,14 @@ begin
   MD5Update(Context, PByteArray(@PADDING), padLen);
   MD5Update(Context, PByteArray(@Bits), 8);
   MD5Encode(PByteArray(@Digest), PUINT4Array(@Context.state), 16);
-  MD5_memset(PByteArray(@Context), 0, SizeOf(Context));
+  MD5_memset(PByteArray(@Context), nCST_Zero, SizeOf(Context));
 end;
 
 function MD5DigestToStr(const Digest: TMD5Digest): string;
 var
   i: Integer;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   for i := 0 to 15 do
     Result := Result + IntToHex(Digest.v[i], 2);
 end;
@@ -403,7 +403,7 @@ end;
 
 function MD5File2(const FileName: string): string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   if (TDMUtils.FileExists2(FileName)) then
   begin
     Result := MD5DigestToStr(MD5File(FileName));
@@ -422,14 +422,14 @@ begin
   MD5Init(Context);
   Size := Stream.Size;
   SavePos := Stream.Position;
-  TotalBytes := 0;
+  TotalBytes := nCST_Zero;
   try
     Stream.Seek(0, soFromBeginning);
     repeat
       ReadBytes := Stream.Read(Buffer, SizeOf(Buffer));
       Inc(TotalBytes, ReadBytes);
       MD5Update(Context, @Buffer, ReadBytes);
-    until (ReadBytes = 0) or (TotalBytes = Size);
+    until (ReadBytes = nCST_Zero) or (TotalBytes = Size);
   finally
     Stream.Seek(SavePos, soFromBeginning);
   end;

@@ -16,7 +16,7 @@ unit uDMRegistry;
 interface
 
 uses
-  Classes, SysUtils, Windows, Registry, Variants;
+  Classes, SysUtils, Windows, Registry, Variants, uConstantUtils;
 
 type
   TDMRegistry = class(TRegistry)
@@ -39,11 +39,11 @@ type
     function GetValueExist: Boolean; overload;
     function GetValueExist(const psFileName: string): Boolean; overload;
     function GetKeyBinaryValue: Integer; overload;
-    function GetKeyBinaryValue(const psFileName: string; const psDefault: Integer = 0): Integer; overload;
+    function GetKeyBinaryValue(const psFileName: string; const psDefault: Integer = nCST_Zero): Integer; overload;
     function SaveKey: Boolean; overload;
     function SaveKey(const psKey, psFileName: string): Boolean; overload;
     function OpenKey2(const pbCanCreate: Boolean = true): Boolean; overload;
-    function OpenKey2(const psKey: string; pbCanCreate: Boolean): Boolean; overload;
+    function OpenKey2(const psKey: string; pbCanCreate: Boolean = true): Boolean; overload;
     function OpenKeyReadOnly2: Boolean; overload;
     function OpenKeyReadOnly2(const psKey: string): Boolean; overload;
     function KeyExists2: Boolean;
@@ -148,7 +148,7 @@ end;
 
 function TDMRegistry.GetKeyValue: string;
 begin
-  Result := EmptyStr;
+  Result := sCST_EmptyStr;
   if GetValueExist(FFilename) then
     Result := TDMCript.Decrypt(ReadString(FFilename));
 end;
@@ -215,7 +215,7 @@ begin
   Add(pbValue);
 end;
 
-function TDMRegistry.GetKeyBinaryValue(const psFileName: string; const psDefault: Integer = 0): Integer;
+function TDMRegistry.GetKeyBinaryValue(const psFileName: string; const psDefault: Integer = nCST_Zero): Integer;
 begin
   FFilename := psFileName;
   Result := GetKeyBinaryValue;
@@ -225,11 +225,7 @@ end;
 
 function TDMRegistry.GetKeyBinaryValue: Integer;
 begin
-  try
-    Result := StrToInt(GetKeyValue);
-  except
-    Result := 0;
-  end;
+  Result := TDMUtils.StrToInt2(GetKeyValue);
 end;
 
 function TDMRegistry.GetValueExist: Boolean;

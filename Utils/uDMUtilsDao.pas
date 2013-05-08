@@ -15,7 +15,7 @@ unit uDMUtilsDao;
 
 interface
 uses
-  SysUtils, DB, DBClient, MidasLib, uDMUtils;
+  SysUtils, uConstantUtils, DB, DBClient, MidasLib, uDMUtils;
 
 type
   TDMUtilsDao = class
@@ -30,7 +30,7 @@ type
     class procedure Cancel(aDataSet: TDataSet); virtual;
     class procedure Clear(aDataSet: TClientDataSet); virtual;
     class function Validate(aDataSet: TDataSet): Boolean; virtual;
-    class function ValidateCampo(aField: TField): Boolean;
+    class function ValidateField(aField: TField): Boolean;
 
   end;
 implementation
@@ -65,7 +65,7 @@ end;
 
 class function TDMUtilsDao.ExistData(aDataSet: TDataSet): Boolean;
 begin
-  Result := (aDataSet.RecordCount > 0);
+  Result := (aDataSet.RecordCount > nCST_Zero);
 end;
 
 class function TDMUtilsDao.Insert(aDataSet: TDataSet): Boolean;
@@ -95,27 +95,33 @@ begin
   Result := True;
   for vIndex := 0 to aDataSet.Fields.Count - 1 do
   begin
-    Result := ValidateCampo(aDataSet.Fields[vIndex]);
+    Result := ValidateField(aDataSet.Fields[vIndex]);
     if not Result then
       Abort;
   end;
 end;
 
-class function TDMUtilsDao.ValidateCampo(aField: TField): Boolean;
+class function TDMUtilsDao.ValidateField(aField: TField): Boolean;
 begin
   Result := True;
   if aField.Required then
   begin
-    Result := not TDMUtils.isEmpty(aField.Value);
-    if not Result then
-    begin
-      case aField.Tag of
-        1: TDMUtilsMessage.ShowMessageError('The ' + aField.DisplayLabel + ' is required!');
-        2: TDMUtilsMessage.ShowMessageError('An ' + aField.DisplayLabel + ' is required!');
-      else
-        TDMUtilsMessage.ShowMessageError(aField.DisplayLabel + ' is required!');
+    try
+      Result := not TDMUtils.isEmpty(aField);
+      if not Result then
+      begin
+        case aField.Tag of
+          1: TDMUtilsMessage.ShowMessageError(sCST_The + sCST_Space + aField.DisplayLabel + sCST_IsRequired);
+          2: TDMUtilsMessage.ShowMessageError(sCST_An + sCST_Space + aField.DisplayLabel + sCST_IsRequired);
+        else
+          TDMUtilsMessage.ShowMessageError(aField.DisplayLabel + sCST_IsRequired);
+        end;
+        aField.FocusControl;
       end;
-      aField.FocusControl;
+    except
+
+      TDMUtils.MyException(sCST_ErroValidateField);
+      exit;
     end;
   end;
 end;

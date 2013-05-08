@@ -14,7 +14,9 @@
 unit uDMHash;
 
 interface
-
+uses
+  uConstantUtils;
+  
 type
   TDMHash = class
   private
@@ -28,7 +30,7 @@ type
   end;
 implementation
 
-uses uDMUtils, uDMUtilsVariant, MD5;
+uses uDMUtils, MD5;
 
 { TDMHash }
 
@@ -37,7 +39,7 @@ begin
   if not TDMUtils.IsEmpty(FText) then
     FText := FText + '!';
 
-  FText := FText + TDMUtilsVariant.FormatValue(aFieldValue);
+  FText := FText + aFieldValue;
 end;
 
 procedure TDMHash.Add(aFieldValue: Integer);
@@ -48,7 +50,7 @@ end;
 procedure TDMHash.AfterConstruction;
 begin
   inherited;
-  FText := '';
+  FText := sCST_EmptyStr;
 end;
 
 function TDMHash.GetHash: string;

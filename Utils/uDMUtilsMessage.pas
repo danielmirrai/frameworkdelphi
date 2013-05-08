@@ -15,7 +15,7 @@ unit uDMUtilsMessage;
 
 interface
 uses
-  Forms, Windows, uConstantUtils;
+  Forms, uConstantUtils, Windows;
 
 type
   TDMUtilsMessage = class

@@ -15,7 +15,7 @@ unit uDMInfoComputer;
 
 interface
 uses
-  NB30, SysUtils, Windows, Variants,
+  NB30, SysUtils, Windows, Variants, uConstantUtils,
   Forms, Registry,
   IdBaseComponent, IdIPWatch;
 
@@ -29,8 +29,8 @@ type
     class function GetAdress_MAC: string;
     class function GetAdress_IP: string;
     class function GetAdress_IP_Rede: string;
-    class function GetName_Processor(aID_Processor: Integer = 0): string;
-    class function GetName_VideoCard(aID: Integer = 0): string;
+    class function GetName_Processor(aID_Processor: Integer = nCST_Zero): string;
+    class function GetName_VideoCard(aID: Integer = nCST_Zero): string;
     class function GetCpuSpeed: string;
     class function GetMotherboard: string;
     class function GetID_Motherboard: Integer;
@@ -48,7 +48,7 @@ type
   end;
 implementation
 
-uses uDMUtils, uConstantUtils, uDMHTTP, MSProdKey;
+uses uDMUtils, uDMHTTP;
 
 { TObjectActionInfoCompute }
 
@@ -58,7 +58,7 @@ var
   vAdapter: TAdapterStatus;
   vNCB: TNCB;
 begin
-  FillChar(vNCB, SizeOf(vNCB), 0);
+  FillChar(vNCB, SizeOf(vNCB), nCST_Zero);
   vNCB.ncb_command := Char(NCBRESET);
   vNCB.ncb_lana_num := aLana;
   if Netbios(@vNCB) <> Char(NRC_GOODRET) then
@@ -67,11 +67,11 @@ begin
     Exit;
   end;
 
-  FillChar(vNCB, SizeOf(vNCB), 0);
+  FillChar(vNCB, SizeOf(vNCB), nCST_Zero);
   vNCB.ncb_command := Char(NCBASTAT);
   vNCB.ncb_lana_num := aLana;
   vNCB.ncb_callname := '*';
-  FillChar(vAdapter, SizeOf(vAdapter), 0);
+  FillChar(vAdapter, SizeOf(vAdapter), nCST_Zero);
   vNCB.ncb_buffer := @vAdapter;
   vNCB.ncb_length := SizeOf(vAdapter);
   if Netbios(@vNCB) <> Char(NRC_GOODRET) then
@@ -108,7 +108,7 @@ var
   vDMHTTP: TDMHTTP;
   vIndex: Integer;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   Exit;
   vDMHTTP := nil;
   try
@@ -117,8 +117,8 @@ begin
     vReturn := vDMHTTP.SendGet;
     vLocate := 'O MEU IP?';
     vIndex := Pos(vLocate, UpperCase(vReturn));
-    if (vIndex > 0) then
-      Result := Copy(vReturn, vIndex + Length(vLocate) + 1, 13);
+    if (vIndex > nCST_Zero) then
+      Result := Copy(vReturn, vIndex + Length(vLocate) + nCST_One, 13);
 
     Result := TDMUtils.RemoveCaracter(['>', '<'], Result);
   finally
@@ -131,8 +131,8 @@ var
   vAdapterList: TLanaEnum;
   vNCB: TNCB;
 begin
-  Result := '';
-  FillChar(vNCB, SizeOf(vNCB), 0);
+  Result := sCST_EmptyStr;
+  FillChar(vNCB, SizeOf(vNCB), nCST_Zero);
   vNCB.ncb_command := Char(NCBENUM);
   vNCB.ncb_buffer := @vAdapterList;
   vNCB.ncb_length := SizeOf(vAdapterList);
@@ -170,7 +170,7 @@ begin
         2: Result := 'Server 2003';
       end
     else
-      if (Win32MajorVersion = 6) and (Win32MinorVersion = 0) then
+      if (Win32MajorVersion = 6) and (Win32MinorVersion = nCST_Zero) then
         Result := 'Vista'
       else
         Result := 'Windows 7';
@@ -180,9 +180,9 @@ class function TDMInfoComputer.GetFamilyWindowsSO: string;
 begin
   if Win32MajorVersion = 4 then
     case Win32MinorVersion of
-      0: Result := TDMUtils.IIf((Length(Win32CSDVersion) > 0) and
+      0: Result := TDMUtils.IIf((Length(Win32CSDVersion) > nCST_Zero) and
           (Win32CSDVersion[1] in ['B', 'C']), '95 OSR2', '95');
-      10: Result := TDMUtils.IIf((Length(Win32CSDVersion) > 0) and
+      10: Result := TDMUtils.IIf((Length(Win32CSDVersion) > nCST_Zero) and
           (Win32CSDVersion[1] = 'A'), '98 SE', '98');
       90: Result := 'ME';
     end
@@ -192,7 +192,7 @@ end;
 
 class function TDMInfoComputer.GetID_Motherboard: Integer;
 begin
-  Result := 0;
+  Result := nCST_Zero;
 end;
 
 class function TDMInfoComputer.GetMemory_RAM: Real;
@@ -221,9 +221,9 @@ var
   vPC: Pchar;
   vTamanho: Cardinal;
 begin
-  vPC := ' ';
+  vPC := PChar(sCST_Space);
   try
-    Result := '';
+    Result := sCST_EmptyStr;
     vTamanho := 100;
     Getmem(vPC, vTamanho);
     GetComputerName(vPC, vTamanho);
@@ -233,12 +233,12 @@ begin
   end;
 end;
 
-class function TDMInfoComputer.GetName_VideoCard(aID: Integer = 0): string;
+class function TDMInfoComputer.GetName_VideoCard(aID: Integer = nCST_Zero): string;
 var
   vRegistry: TRegistry;
   vDevice: string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   vRegistry := TRegistry.Create(KEY_READ); //ACESSO APENAS LEITURA
   vRegistry.RootKey := HKEY_LOCAL_MACHINE;
   if vRegistry.OpenKeyReadOnly('\HARDWARE\DEVICEMAP\VIDEO\') then
@@ -250,11 +250,11 @@ begin
   end;
 end;
 
-class function TDMInfoComputer.GetName_Processor(aID_Processor: Integer = 0): string;
+class function TDMInfoComputer.GetName_Processor(aID_Processor: Integer = nCST_Zero): string;
 var
   Reg: TRegistry;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   Reg := TRegistry.Create;
   try
     Reg.RootKey := HKEY_LOCAL_MACHINE;
@@ -270,7 +270,7 @@ var
   vUsuario: Pchar;
   vTamanho: Cardinal;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
   vTamanho := 100;
   Getmem(vUsuario, vTamanho);
   GetUserName(vUsuario, vTamanho);
@@ -280,7 +280,7 @@ end;
 
 class function TDMInfoComputer.GetMotherboard: string;
 begin
-  Result := '';
+  Result := sCST_EmptyStr;
 end;
 
 class function TDMInfoComputer.GetResolucao: string;
@@ -299,8 +299,8 @@ var
   vDirLen, vFlags: DWord;
   vDLabel: array[0..11] of Char;
 begin
-  Result := '';
-  GetVolumeInformation(PChar(disco), vdLabel, 12, @vSerial, vDirLen, vFlags, nil, 0);
+  Result := sCST_EmptyStr;
+  GetVolumeInformation(PChar(disco), vdLabel, 12, @vSerial, vDirLen, vFlags, nil, nCST_Zero);
   Result := IntToHex(vSerial, 8);
 end;
 
@@ -350,7 +350,7 @@ end;
 
 class function TDMInfoComputer.GetBiosInfo: string;
 begin
-  Result := GetRegInfoWinNT;
+//  Result := GetRegInfoWinNT;
 end;
 
 end.
