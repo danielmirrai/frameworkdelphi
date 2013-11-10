@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{60C568CE-B0A3-44BC-B870-A995DBEFD24B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Framework\Framework.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Delphi Mapping\DelphiMapping.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Framework\Clear\Clear.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Framework">
+        <MSBuild Projects="Framework\Framework.dproj"/>
+    </Target>
+    <Target Name="Framework:Clean">
+        <MSBuild Projects="Framework\Framework.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Framework:Make">
+        <MSBuild Projects="Framework\Framework.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphiMapping">
+        <MSBuild Projects="Delphi Mapping\DelphiMapping.dproj"/>
+    </Target>
+    <Target Name="DelphiMapping:Clean">
+        <MSBuild Projects="Delphi Mapping\DelphiMapping.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiMapping:Make">
+        <MSBuild Projects="Delphi Mapping\DelphiMapping.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Clear">
+        <MSBuild Projects="Framework\Clear\Clear.dproj"/>
+    </Target>
+    <Target Name="Clear:Clean">
+        <MSBuild Projects="Framework\Clear\Clear.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Clear:Make">
+        <MSBuild Projects="Framework\Clear\Clear.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Framework;DelphiMapping;Clear"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Framework:Clean;DelphiMapping:Clean;Clear:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Framework:Make;DelphiMapping:Make;Clear:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Version="1.0">
+  <Title>Delphi Mapping</Title>
+  <Summary>Delphi Mapping - Tools for refactory</Summary>
+  <Author>Daniel Mirrai</Author>
+  <Copyright>Daniel Mirrai Serena Duarte</Copyright>
+  <Comment/>
+  <Language>1046</Language>
+  <Charset>1</Charset>
+  <HeaderHtml>&lt;%TopicTitle%&gt;</HeaderHtml>
+  <FooterHtml>Powered by &lt;a href="http://www.danielmirrai.com" target="_blank"&gt;Daniel Mirrai&lt;/a&gt;</FooterHtml>
+  <CustomDefines/>
+  <ShowImplementationSection>false</ShowImplementationSection>
+  <ShowPrivateMembers>false</ShowPrivateMembers>
+  <Sources>
+    <Source>.\Delphi Mapping\DelphiMapping.dpr</Source>
+    <Source>.\Framework\Clear\Clear.dpr</Source>
+    <Source>.\Framework\Framework.dpk</Source>
+  </Sources>
+  <Outputs>
+    <Output Type="HTML">
+      <Active>true</Active>
+      <OutputDirectory>Doc\Html</OutputDirectory>
+    </Output>
+    <Output Type="CHM">
+      <Active>false</Active>
+      <OutputFileName>Doc\CHM\Projects.chm</OutputFileName>
+    </Output>
+    <Output Type="MSHELP2">
+      <Active>false</Active>
+      <OutputFileName>Doc\MSHelp2\Projects.HxS</OutputFileName>
+      <Namespace>Projects</Namespace>
+      <TitleID>library</TitleID>
+    </Output>
+    <Output Type="HelpAndManual">
+      <Active>false</Active>
+      <OutputFileName>Doc\Help&amp;Manual\Projects.hmxp</OutputFileName>
+    </Output>
+  </Outputs>
+</Project>

@@ -1,0 +1,78 @@
+package Framework;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclimg,
+  xmlrtl,
+  dsnap,
+  dbrtl,
+  vcldb,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
+
+contains
+  MidasLib,
+  uFormModelCustom in 'Forms\Model\uFormModelCustom.pas' {FormModelCustom},
+  uConstantUtils in 'Constant\uConstantUtils.pas',
+  uFormModel in 'Forms\Model\uFormModel.pas' {FormModel},
+  uFormAddModelCustom in 'Forms\Add\uFormAddModelCustom.pas' {FormAddModelCustom},
+  uFormAddModel in 'Forms\Add\uFormAddModel.pas' {FormAddModel},
+  uFormGridCustom in 'Forms\View\uFormGridCustom.pas' {FormGridCustom},
+  uFormGrid in 'Forms\View\uFormGrid.pas' {FormGrid},
+  uFormViewModelCustom in 'Forms\View\uFormViewModelCustom.pas' {FormViewModelCustom},
+  uFormViewModel in 'Forms\View\uFormViewModel.pas' {FormViewModel},
+  uFormViewSearchModelCustom in 'Forms\View\uFormViewSearchModelCustom.pas' {FormViewSearchModelCustom},
+  uFormViewSearchModel in 'Forms\View\uFormViewSearchModel.pas' {FormViewSearchModel},
+  uObjectAction in 'ObjectAction\uObjectAction.pas',
+  uObjectDaoCustom in 'ObjectDao\uObjectDaoCustom.pas' {ObjectDaoCustom: TDataModule},
+  uObjectDao in 'ObjectDao\uObjectDao.pas' {ObjectDao: TDataModule},
+  uObjectDaoApplication in 'ObjectDao\uObjectDaoApplication.pas' {ObjectDaoApplication: TDataModule},
+  uObjectActionCustom in 'ObjectAction\uObjectActionCustom.pas',
+  MD5 in 'Utils\MD5.pas',
+  uDMCript in 'Utils\uDMCript.pas',
+  uDMException in 'Utils\uDMException.pas',
+  uDMFileInfoUtils in 'Utils\uDMFileInfoUtils.pas',
+  uDMHash in 'Utils\uDMHash.pas',
+  uDMHTTP in 'Utils\uDMHTTP.pas',
+  uDMInfoComputer in 'Utils\uDMInfoComputer.pas',
+  uDMList in 'Utils\uDMList.pas',
+  uDMRegistry in 'Utils\uDMRegistry.pas',
+  uDMUtils in 'Utils\uDMUtils.pas',
+  uDMUtilsDao in 'Utils\uDMUtilsDao.pas',
+  uDMUtilsImage in 'Utils\uDMUtilsImage.pas',
+  uDMUtilsMessage in 'Utils\uDMUtilsMessage.pas',
+  uDMValidateProcess in 'Utils\uDMValidateProcess.pas',
+  uFactoryObject in 'Utils\uFactoryObject.pas';
+
+end.
+
