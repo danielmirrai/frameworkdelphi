@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012.12.08 16:02:17.000.964,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012.12.09 14:08:45.000.498,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013.02.08 00:31:56.000.974,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013.02.08 00:32:43.000.016,F:\Programação\Delphi\AntiCheat\Cript\uFrmPrincipal.dfm=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2013.02.08 00:32:43.000.016,F:\Programação\Delphi\AntiCheat\Cript\uFrmPrincipal.pas=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013.02.08 00:36:46.000.337,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMCript.pas</Transaction>
+    <Transaction>2013.02.08 00:39:36.000.926,F:\Programação\Delphi\AntiCheat\Cript\Cript.dproj=C:\Users\Daniel\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013.02.08 21:28:52.000.158,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMUtils.pas</Transaction>
+    <Transaction>2013.02.08 21:29:42.000.343,=F:\Programação\Delphi\AntiCheat\Framework\Constant\uConstantUtils.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.858,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMHash.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.800,=F:\Programação\Delphi\AntiCheat\Framework\Utils\MD5.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.901,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMInfoComputer.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.922,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMList.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.838,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMFileInfoUtils.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.969,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMSevenZip.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.879,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMHTTP.pas</Transaction>
+    <Transaction>2013.02.08 21:30:05.000.946,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMLog.pas</Transaction>
+    <Transaction>2013.02.08 21:30:06.000.048,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMUtilsString.pas</Transaction>
+    <Transaction>2013.02.08 21:30:06.000.025,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMUtilsMessage.pas</Transaction>
+    <Transaction>2013.02.08 21:30:06.000.072,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMUtilsVariant.pas</Transaction>
+    <Transaction>2013.02.08 21:30:06.000.102,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uFactoryObject.pas</Transaction>
+    <Transaction>2013.02.08 21:30:06.000.002,=F:\Programação\Delphi\AntiCheat\Framework\Utils\uDMUtilsImage.pas</Transaction>
+    <Transaction>2013.02.08 21:30:25.000.582,=F:\Programação\Delphi\AntiCheat\Framework\Constant\uTraducaoDevExpressBR.pas</Transaction>
+    <Transaction>2013.02.08 21:30:25.000.509,=F:\Programação\Delphi\AntiCheat\Framework\Constant\uConstantSystem.pas</Transaction>
+    <Transaction>2013.02.08 21:30:37.000.736,F:\Programação\Delphi\AntiCheat\Framework\Utils\uFactoryObject.pas=</Transaction>
+    <Transaction>2013.02.08 23:24:15.000.735,=F:\Programação\Delphi\AntiCheat\Interface\uDMValidateProcess.pas</Transaction>
+  </Transactions>
+</BorlandProject>
