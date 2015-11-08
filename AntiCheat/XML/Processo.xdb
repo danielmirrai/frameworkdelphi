@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="PROCESSOS" type="PROCESSOSType"/>
+  <xs:complexType name="PROCESSOSType"><xs:annotation>
+      <xs:appinfo xdb:docElement="PROCESSOS"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PROCESSO" type="PROCESSOType" maxOccurs="unbounded"/>
+      <xs:element name="HASH" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PROCESSOType"><xs:annotation>
+      <xs:appinfo xdb:repeated="True"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="MEMORIA_RAM_UTILIZADA" type="xs:integer"/>
+      <xs:element name="DESCRICAO" type="xs:string"/>
+      <xs:element name="NOME" type="xs:string"/>
+      <xs:element name="CPU_UTILIZADO" type="xs:integer"/>
+      <xs:element name="NOME_USUARIO_SISTEMA" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

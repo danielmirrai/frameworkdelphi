@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IMAGENS>
+	<IMAGEM>
+        		<NOME>001.jpg</NOME>
+        		<ID_PARTIDA>5</ID_PARTIDA>        		          
+		<DATA>12/01/2013 14:04:20</DATA>
+		<TAMANHO>12</TAMANHO>
+<HASH>MD5(001.jpg!5!12/01/2013 14:04:20!12!Chave</HASH>
+	</IMAGEM>
+	<IMAGEM>
+        		<NOME>002.jpg</NOME>
+        		<ID_PARTIDA>5</ID_PARTIDA>        		          
+		<DATA>12/01/2013 14:08:20</DATA>
+		<TAMANHO>18</TAMANHO>
+<HASH>MD5(002.jpg!5!12/01/2013 14:08:20!18!Chave</HASH>
+	</IMAGEM>
+</IMAGENS>

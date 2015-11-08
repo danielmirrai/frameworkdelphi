@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="partidas" type="partidasType"/>
+  <xs:complexType name="partidasType"><xs:annotation>
+      <xs:appinfo xdb:docElement="partidas"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="partida" type="partidaType" maxOccurs="unbounded"/>
+      <xs:element name="hash" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="partidaType"><xs:annotation>
+      <xs:appinfo xdb:repeated="True"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="xs:integer"/>
+      <xs:element name="codigo" type="xs:string"/>
+      <xs:element name="descricao" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

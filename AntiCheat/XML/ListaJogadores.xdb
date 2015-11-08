@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="jogadores_online" type="jogadores_onlineType"/>
+  <xs:complexType name="jogadores_onlineType"><xs:annotation>
+      <xs:appinfo xdb:docElement="jogadores_online"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="jogador_info" type="jogador_infoType" maxOccurs="unbounded"/>
+      <xs:element name="hash" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="jogador_infoType"><xs:annotation>
+      <xs:appinfo xdb:repeated="True"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="xs:integer"/>
+      <xs:element name="login" type="xs:string"/>
+      <xs:element name="cla" type="xs:string"/>
+      <xs:element name="data_inicio" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

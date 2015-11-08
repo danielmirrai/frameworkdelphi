@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<erro>
+	<codigo>1</codigo>
+	<mensagem><![CDATA[usuario e senha invalidos]]></mensagem>
+	<hash><![CDATA[db7b6cb0f1214b47e4850c6707ebd70b]]></hash>
+</erro>

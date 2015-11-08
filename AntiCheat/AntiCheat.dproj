@@ -1,0 +1,226 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{00014DCA-8F70-47A2-94DA-8281608CD666}</ProjectGuid>
+			<MainSource>AntiCheat.dpr</MainSource>
+			<ProjectVersion>12.2</ProjectVersion>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclimg;vcl;vclx;dbrtl;Rave90VCL;bdertl;rtl;xmlrtl;vclactnband;VclSmp;svnui;svn;TeeUI;TeeDB;Tee;vcldb;vcldbx;vcltouch;dsnap;dsnapcon;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_110_150;Intraweb_110_150;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapClient;dbxcds;DataSnapServer;AzureCloud;DBXInterBaseDriver;DBXMySQLDriver;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;CodeSiteExpressVcl;JclDeveloperTools;Jcl;JclVcl;JclContainers;dxCoreRS15;dxServerModeRS15;cxDataRS15;cxLibraryRS15;dxGDIPlusRS15;dxThemeRS15;dxADOServerModeRS15;dxDBXServerModeRS15;cxEditorsRS15;dxmdsRS15;dxBarRS15;dxComnRS15;dxBarDBNavRS15;dxBarExtDBItemsRS15;dxBarExtItemsRS15;dxRibbonRS15;cxBarEditItemRS15;dxdbtrRS15;dxtrmdRS15;cxPageControlRS15;dxDockingRS15;dxFlowChartRS15;cxPageControldxBarPopupMenuRS15;dxTabbedMDIRS15;dxLayoutControlRS15;dxNavBarRS15;dxorgcRS15;dxdborRS15;cxGridRS15;cxExportRS15;cxPivotGridRS15;cxPivotGridChartRS15;cxPivotGridOLAPRS15;cxTreeListRS15;cxTreeListdxBarPopupMenuRS15;cxSchedulerRS15;cxSchedulerGridRS15;dcldxSkinsCoreRS15;dxSkinsCoreRS15;dxSkinscxPCPainterRS15;dxSkinscxSchedulerPainterRS15;dxSkinsdxDLPainterRS15;dxSkinsdxBarPainterRS15;dxSkinsdxNavBarPainterRS15;dxSkinsdxRibbonPainterRS15;dxSpellCheckerRS15;cxSpreadSheetRS15;cxVerticalGridRS15;dxPSCoreRS15;dxPSLnksRS15;dxPScxCommonRS15;dxPScxExtCommonRS15;dxPScxGridLnkRS15;dxPSdxLCLnkRS15;dxPScxPivotGridLnkRS15;dxPScxSchedulerLnkRS15;dxPScxSSLnkRS15;dxPScxTLLnkRS15;dxPScxVGridLnkRS15;dxPSTeeChartRS15;dxPSDBTeeChartRS15;dxPSdxOCLnkRS15;dxPSdxDBOCLnkRS15;dxPSdxDBTVLnkRS15;dxPSdxFCLnkRS15;dxPScxPCProdRS15;dxPsPrVwAdvRS15;dxPSPrVwRibbonRS15;dxSkinBlackRS15;dxSkinBlueRS15;dxSkinCaramelRS15;dxSkinCoffeeRS15;dxSkinDarkRoomRS15;dxSkinDarkSideRS15;dxSkinFoggyRS15;dxSkinGlassOceansRS15;dxSkiniMaginaryRS15;dxSkinLilianRS15;dxSkinLiquidSkyRS15;dxSkinLondonLiquidSkyRS15;dxSkinMcSkinRS15;dxSkinMoneyTwinsRS15;dxSkinOffice2007BlackRS15;dxSkinOffice2007BlueRS15;dxSkinOffice2007GreenRS15;dxSkinOffice2007PinkRS15;dxSkinOffice2007SilverRS15;dxSkinOffice2010BlackRS15;dxSkinOffice2010BlueRS15;dxSkinOffice2010SilverRS15;dxSkinPumpkinRS15;dxSkinSevenRS15;dxSkinSharpRS15;dxSkinSilverRS15;dxSkinSpringTimeRS15;dxSkinStardustRS15;dxSkinSummer2008RS15;dxSkinValentineRS15;dxSkinXmas2008BlueRS15;dxSkinBlueprintRS15;dxSkinDevExpressDarkStyleRS15;dxSkinDevExpressStyleRS15;dxSkinHighContrastRS15;dxSkinSevenClassicRS15;dxSkinSharpPlusRS15;dxSkinTheAsphaltWorldRS15;dxSkinVS2010RS15;dxSkinWhiteprintRS15;dxTileControlRS15</DCC_UsePackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_DcuOutput>.\$(Config)\$(Platform)</DCC_DcuOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ExeOutput>.\$(Config)\$(Platform)</DCC_ExeOutput>
+			<DCC_E>false</DCC_E>
+			<DCC_N>false</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_ExeOutput>.\$(Config)\$(Platform)\EXE</DCC_ExeOutput>
+			<DCC_DcuOutput>.\$(Config)\$(Platform)\dcu</DCC_DcuOutput>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="AntiCheat.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="Framework\ObjectAction\uObjectAction.pas"/>
+			<DCCReference Include="Framework\Utils\uDMUtilsString.pas"/>
+			<DCCReference Include="Framework\Utils\uDMUtils.pas"/>
+			<DCCReference Include="Framework\Utils\uDMUtilsVariant.pas"/>
+			<DCCReference Include="ObjectAction\uObjectActionProcess.pas"/>
+			<DCCReference Include="Framework\ObjectDao\uObjectDaoCustom.pas">
+				<Form>ObjectDaoCustom</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Framework\ObjectDao\uObjectDao.pas">
+				<Form>ObjectDao</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ObjectDao\uObjectDaoProcess.pas">
+				<Form>ObjectDaoProcess</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Interface\uInterfaceXMLProcess.pas"/>
+			<DCCReference Include="Framework\Utils\MD5.pas"/>
+			<DCCReference Include="Framework\Utils\uDMHTTP.pas"/>
+			<DCCReference Include="Constant\uConstantProcess.pas"/>
+			<DCCReference Include="ObjectAction\uObjectActionLogin.pas"/>
+			<DCCReference Include="Framework\Utils\uFactoryObject.pas"/>
+			<DCCReference Include="ObjectDao\uObjectdaoLogin.pas">
+				<Form>ObjectDaoLogin</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Framework\Utils\uDMUtilsMessage.pas"/>
+			<DCCReference Include="Framework\ObjectDao\uObjectDaoApplication.pas">
+				<Form>ObjectDaoApplication</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ObjectDao\uObjectDaoImage.pas">
+				<Form>ObjectDaoImage</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ObjectAction\uObjectActionImage.pas"/>
+			<DCCReference Include="Constant\uConstantImage.pas"/>
+			<DCCReference Include="Framework\Utils\uDMUtilsImage.pas"/>
+			<DCCReference Include="ObjectDao\uObjectDaoGame.pas">
+				<Form>ObjectDaoGame</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ObjectAction\uObjectActionGame.pas"/>
+			<DCCReference Include="Framework\Utils\uDMSevenZip.pas"/>
+			<DCCReference Include="Framework\Constant\uConstantSystem.pas"/>
+			<DCCReference Include="Framework\Forms\View\uFormGridCustom.pas">
+				<Form>FormGridCustom</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\Add\uFormCadModelCustom.pas">
+				<Form>FormCadModelCustom</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\ObjectAction\uObjectActionCustom.pas"/>
+			<DCCReference Include="Framework\Forms\Model\uFormModel.pas">
+				<Form>FormModel</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\Model\uFormModelCustom.pas">
+				<Form>FormModelCustom</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\View\uFormViewModel.pas">
+				<Form>FormViewModel</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\Add\uFormCadModel.pas">
+				<Form>FormCadModel</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\Add\uFormCadLogin.pas">
+				<Form>FormCadLogin</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\View\uFormViewSearchModelCustom.pas">
+				<Form>FormViewSearchModelCustom</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\View\uFormViewSearchModel.pas">
+				<Form>FormViewSearchModel</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\View\uFormViewModelCustom.pas">
+				<Form>FormViewModelCustom</Form>
+			</DCCReference>
+			<DCCReference Include="Interface\uInterfaceXMLLogin.pas"/>
+			<DCCReference Include="Interface\uInterfaceXMLErro.pas"/>
+			<DCCReference Include="Framework\Constant\uConstantUtils.pas"/>
+			<DCCReference Include="Interface\uInterfaceXMLListGame.pas"/>
+			<DCCReference Include="Forms\Info\uFormPrincipal.pas">
+				<Form>FormPrincipal</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Constant\uTraducaoDevExpressBR.pas"/>
+			<DCCReference Include="Framework\Utils\uDMHash.pas"/>
+			<DCCReference Include="Interface\uInterfaceXMLSucesso.pas"/>
+			<DCCReference Include="Forms\View\uFormViewSearchGame.pas">
+				<Form>FormViewSearchGame</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Forms\View\uFormGrid.pas">
+				<Form>FormGrid</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Utils\uDMInfoComputer.pas"/>
+			<DCCReference Include="Framework\Utils\uDMFileInfoUtils.pas"/>
+			<DCCReference Include="ObjectAction\uObjectActionPlayers.pas"/>
+			<DCCReference Include="ObjectDao\uObjectDaoPlayers.pas">
+				<Form>ObjectDaoPlayers</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Constant\uConstantPlayers.pas"/>
+			<DCCReference Include="Framework\Utils\uDMLog.pas"/>
+			<DCCReference Include="Framework\Utils\uDMList.pas"/>
+			<DCCReference Include="Interface\uInterfaceXMLPlayers.pas"/>
+			<DCCReference Include="Forms\View\uFormViewSearchPlayers.pas">
+				<Form>FormViewSearchPlayers</Form>
+			</DCCReference>
+			<DCCReference Include="Framework\Utils\uDMCript.pas"/>
+			<DCCReference Include="Interface\uDMValidateProcess.pas"/>
+			<DCCReference Include="C:\Program Files\Embarcadero\RAD Studio\8.0\source\SevenZipVCL_076\SevenZipVCL.pas"/>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">1</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">JoinTech</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">Guardian AC - AntiCheat</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.0.1</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">Guardian AC - AntiCheat</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">AntiCheat.exe</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">Guardian AC - AntiCheat</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.1</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">AntiCheat.dpr</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>False</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

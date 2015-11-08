@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="erro" type="erroType"/>
+  <xs:complexType name="erroType"><xs:annotation>
+      <xs:appinfo xdb:docElement="erro"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="codigo" type="xs:integer"/>
+      <xs:element name="mensagem" type="xs:string"/>
+      <xs:element name="hash" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

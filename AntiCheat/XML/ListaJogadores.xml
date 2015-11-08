@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jogadores_online>
+	<jogador_info>
+		<id>19</id>
+		<login><![CDATA[login]]></login>
+		<cla><![CDATA[cla]]></cla>
+		<data_inicio><![CDATA[2013-02-03 01:05:50]]></data_inicio>
+	</jogador_info>
+	<jogador_info>
+		<id>20</id>
+		<login><![CDATA[login]]></login>
+		<cla><![CDATA[cla]]></cla>
+		<data_inicio><![CDATA[2013-02-02 01:05:50]]></data_inicio>
+	</jogador_info>
+	<jogador_info>
+		<id>19</id>
+		<login><![CDATA[login]]></login>
+		<cla><![CDATA[cla]]></cla>
+		<data_inicio><![CDATA[2013-02-03 01:05:50]]></data_inicio>
+	</jogador_info>
+	<hash><![CDATA[0c134ae963989c780af9d79cc475821d]]></hash>
+</jogadores_online>

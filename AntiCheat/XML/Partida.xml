@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PARTIDAS>
+	<PARTIDA>
+        		<ID>1</ID>
+        		<DESCRICAO>Jogo123</DESCRICAO>        	
+        		<SENHA>MD5(123)</SENHA>        	
+        		<DATA_CRIACAO>14/01/2013 22:04:20</DATA_CRIACAO>        	
+        		<DATA_INICIO>14/01/2013 22:20:10</DATA_INICIO>        		
+        		<DATA_FIM>15/01/2013 12:50:10</DATA_FIM>        	
+		<ATIVO>SIM</ATIVO>	
+<HASH>MD5(1!Jogo123!MD5(123)!14/01/2013 22:04:20!14/01/2013 22:20:10!15/01/2013 12:50:10!SIM!Chave</HASH>
+	</PARTIDA>
+	<PARTIDA>
+        		<ID>2</ID>
+        		<DESCRICAO>NovoJogo</DESCRICAO>        	
+        		<SENHA>MD5(123)</SENHA>        	
+        		<DATA_CRIACAO>14/01/2013 22:04:20</DATA_CRIACAO>        	
+        		<DATA_INICIO>14/01/2013 22:20:10</DATA_INICIO>        		
+        		<DATA_FIM>15/01/2013 12:50:10</DATA_FIM>        	
+		<ATIVO>SIM</ATIVO>	
+<HASH>MD5(2!NovoJogo!MD5(123)!14/01/2013 22:04:20!14/01/2013 22:20:10!15/01/2013 12:50:10!SIM!Chave</HASH>
+	</PARTIDA>
+</PARTIDAS>

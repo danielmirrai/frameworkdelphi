@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/6.0/XMLDataBinding">
+	<xs:element name="IMAGENS" type="IMAGENSType"/>
+	<xs:complexType name="IMAGENSType"><xs:annotation>
+			<xs:appinfo xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding" xdb:docElement="IMAGENS"/>  <xs:appinfo xdb:docElement="IMAGENS"/>
+    </xs:annotation>
+		<xs:sequence>
+			<xs:element name="IMAGEM" type="IMAGEMType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IMAGEMType">
+		<xs:sequence>
+			<xs:element name="NOME" type="xs:string"/>
+			<xs:element name="ID_PARTIDA" type="xs:integer"/>
+			<xs:element name="DATA" type="xs:string"/>
+			<xs:element name="TAMANHO" type="xs:integer"/>
+			<xs:element name="HASH" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

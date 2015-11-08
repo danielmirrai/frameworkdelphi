@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+	<xs:element name="JOGADORES" type="JOGADORESType"/>
+	<xs:complexType name="JOGADORESType"><xs:annotation>
+			<xs:appinfo xdb:docElement="JOGADORES"/>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="JOGADOR" type="JOGADORType"/>
+			<xs:element name="HASH" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JOGADORType">
+		<xs:sequence>
+			<xs:element name="LOGIN" type="xs:string"/>
+			<xs:element name="CLA" type="xs:string"/>
+			<xs:element name="DATA_INICIO" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
