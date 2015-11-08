@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Version="1.0">
+  <Title>Delphi Framework - MVP </Title>
+  <Summary/>
+  <Author>Daniel Mirrai</Author>
+  <Email>danielmirrai@gmail.com</Email>
+  <Copyright>Daniel Mirrai</Copyright>
+  <Comment>Framework for developer MVP in Delphi</Comment>
+  <Language>1033</Language>
+  <Charset>1</Charset>
+  <HeaderHtml>&lt;%TopicTitle%&gt; - Delphi Framework - MVP - Software Developer</HeaderHtml>
+  <FooterHtml>Developer  by &lt;a href="http://www.danielmirrai.com" target="_blank"&gt;Daniel Mirrai Delphi Developer&lt;/a&gt;</FooterHtml>
+  <CustomDefines/>
+  <ShowImplementationSection>true</ShowImplementationSection>
+  <ShowPrivateMembers>true</ShowPrivateMembers>
+  <ShowInheritedMembers>true</ShowInheritedMembers>
+  <ShowPropertyAccessors>true</ShowPropertyAccessors>
+  <FileNamePolicy>0</FileNamePolicy>
+  <CompilerVersion>16</CompilerVersion>
+  <TargetPlatform>0</TargetPlatform>
+  <Sources>
+    <Source>.\Framework\Package\XE4\Framework.dpk</Source>
+    <Source>.\Delphi Mapping\Project\XE4\DelphiMapping.dpr</Source>
+  </Sources>
+  <Outputs>
+    <Output Type="HTML">
+      <Active>true</Active>
+      <OutputDirectory>../wiki/Html</OutputDirectory>
+    </Output>
+    <Output Type="CHM">
+      <Active>false</Active>
+      <OutputFileName>..\wiki\Doc\CHM\Projects_XE4.chm</OutputFileName>
+    </Output>
+    <Output Type="MSHELP2">
+      <Active>false</Active>
+      <OutputFileName>Doc\MSHelp2\Projects_XE4.HxS</OutputFileName>
+      <Namespace>Projects_XE4</Namespace>
+      <TitleID>library</TitleID>
+    </Output>
+    <Output Type="HelpAndManual">
+      <Active>false</Active>
+      <OutputFileName>Doc\HM\Projects_XE4.hmxp</OutputFileName>
+    </Output>
+  </Outputs>
+</Project>

@@ -1,0 +1,29 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = D7_Framework.bpl.1.0 SistemaDePedidos.exe UpdateDFM.exe Clear.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+D7_Framework.bpl.1.0: Framework\Package\D7\D7_Framework.dpk
+  $(DCC)
+
+SistemaDePedidos.exe: SistemaDePedidos\Project\D7\SistemaDePedidos.dpr
+  $(DCC)
+
+UpdateDFM.exe: Framework\UpdateDFM\D7\UpdateDFM.dpr
+  $(DCC)
+
+Clear.exe: Framework\Clear\D7\Clear.dpr
+  $(DCC)
+
+

@@ -9,9 +9,6 @@
         <Projects Include="Delphi Mapping\DelphiMapping.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Framework\Clear\Clear.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -38,23 +35,14 @@
     <Target Name="DelphiMapping:Make">
         <MSBuild Projects="Delphi Mapping\DelphiMapping.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Clear">
-        <MSBuild Projects="Framework\Clear\Clear.dproj"/>
-    </Target>
-    <Target Name="Clear:Clean">
-        <MSBuild Projects="Framework\Clear\Clear.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Clear:Make">
-        <MSBuild Projects="Framework\Clear\Clear.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Framework;DelphiMapping;Clear"/>
+        <CallTarget Targets="Framework;DelphiMapping"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Framework:Clean;DelphiMapping:Clean;Clear:Clean"/>
+        <CallTarget Targets="Framework:Clean;DelphiMapping:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Framework:Make;DelphiMapping:Make;Clear:Make"/>
+        <CallTarget Targets="Framework:Make;DelphiMapping:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
