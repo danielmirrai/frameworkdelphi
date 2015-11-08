@@ -1,0 +1,3 @@
+Log Software
+21/10/2015 15:51:07 - Não foi possível conectar com a base! Error: unavailable database
+
