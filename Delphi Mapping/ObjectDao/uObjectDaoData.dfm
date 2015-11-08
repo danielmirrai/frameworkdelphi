@@ -1,0 +1,2 @@
+inherited ObjectDaoData: TObjectDaoData
+end

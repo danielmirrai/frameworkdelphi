@@ -1,0 +1,2 @@
+inherited ObjectDaoCompilerDirective: TObjectDaoCompilerDirective
+end

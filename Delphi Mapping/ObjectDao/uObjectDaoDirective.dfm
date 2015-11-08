@@ -1,0 +1,2 @@
+inherited ObjectDaoDirective: TObjectDaoDirective
+end

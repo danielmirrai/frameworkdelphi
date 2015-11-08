@@ -1,0 +1,2 @@
+inherited ObjectDaoWordDelphi: TObjectDaoWordDelphi
+end

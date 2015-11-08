@@ -1,0 +1,2 @@
+inherited ObjectDaoOperator: TObjectDaoOperator
+end
