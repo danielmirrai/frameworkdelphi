@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/11/03 12:46:51.000.900,=rtl.dcp</Transaction>
+    <Transaction>2013/11/03 12:47:43.000.472,C:\Users\Daniel\Documents\RAD Studio\Projects\Package1.dproj=F:\Fontes\Framework\trunk\Framework\Package1.dproj</Transaction>
+    <Transaction>2013/11/03 12:51:39.000.600,F:\Fontes\Framework\trunk\Framework\FrameworkDesign.dproj=F:\Fontes\Framework\trunk\Framework\Package1.dproj</Transaction>
+    <Transaction>2013/11/03 12:51:56.000.400,F:\Fontes\Framework\trunk\Framework\FrameworkDT.dproj=F:\Fontes\Framework\trunk\Framework\FrameworkDesign.dproj</Transaction>
+    <Transaction>2013/11/03 12:53:01.000.962,=F:\Fontes\Framework\trunk\Framework\Constant\uConstantUtils.pas</Transaction>
+    <Transaction>2013/11/03 12:54:45.000.919,=vcl.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:45.000.948,=vclimg.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:45.000.977,=xmlrtl.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.076,=vcldb.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.183,=IndyCore.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.044,=dbrtl.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.015,=dsnap.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.109,=IndySystem.dcp</Transaction>
+    <Transaction>2013/11/03 12:54:46.000.145,=IndyProtocols.dcp</Transaction>
+    <Transaction>2013/11/03 14:42:42.000.588,F:\Fontes\Framework\trunk\Framework\Framework.dproj=F:\Fontes\Framework\trunk\Framework\FrameworkDT.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
