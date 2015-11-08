@@ -1,0 +1,3 @@
+Para utilizar o Gamer é necessário aceitar todos os termos descritos neste documento.
+O programa é de distribuição gratuita, desde que seja explicitado o autor deste.
+Este programa captura algumas informações de alguns processos em seu computador.
