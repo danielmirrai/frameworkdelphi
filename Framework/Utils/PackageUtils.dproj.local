@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/12/23 21:16:42.000.207,=rtl.dcp</Transaction>
+    <Transaction>2013/12/23 21:16:51.000.439,=rtl.dcp</Transaction>
+    <Transaction>2013/12/23 21:17:06.000.106,=F:\Fontes\Framework\trunk\Framework\Utils\uDBConvert.pas</Transaction>
+    <Transaction>2013/12/23 21:17:06.000.085,=F:\Fontes\Framework\trunk\Framework\Utils\MD5.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.728,=F:\Fontes\Framework\trunk\Framework\Utils\uDMSevenZip.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.648,=F:\Fontes\Framework\trunk\Framework\Utils\uDMHTTP.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.627,=F:\Fontes\Framework\trunk\Framework\Utils\uDMHash.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.586,=F:\Fontes\Framework\trunk\Framework\Utils\uDMException.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.777,=F:\Fontes\Framework\trunk\Framework\Utils\uDMUtils.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.689,=F:\Fontes\Framework\trunk\Framework\Utils\uDMList.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.607,=F:\Fontes\Framework\trunk\Framework\Utils\uDMFileInfoUtils.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.668,=F:\Fontes\Framework\trunk\Framework\Utils\uDMInfoComputer.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.854,=F:\Fontes\Framework\trunk\Framework\Utils\uDMUtilsMessage.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.565,=F:\Fontes\Framework\trunk\Framework\Utils\uDMCript.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.748,=F:\Fontes\Framework\trunk\Framework\Utils\uDMThreadUtils.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.708,=F:\Fontes\Framework\trunk\Framework\Utils\uDMRegistry.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.895,=F:\Fontes\Framework\trunk\Framework\Utils\uFactoryObject.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.875,=F:\Fontes\Framework\trunk\Framework\Utils\uDMValidateProcess.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.833,=F:\Fontes\Framework\trunk\Framework\Utils\uDMUtilsImage.pas</Transaction>
+    <Transaction>2013/12/23 21:17:07.000.811,=F:\Fontes\Framework\trunk\Framework\Utils\uDMUtilsDao.pas</Transaction>
+    <Transaction>2013/12/23 21:17:24.000.979,=F:\Fontes\Framework\trunk\Framework\Constant\uConstantUtils.pas</Transaction>
+    <Transaction>2013/12/23 21:17:42.000.901,F:\Fontes\Framework\trunk\Framework\PackageUtils.dproj=C:\Users\Daniel\Documents\RAD Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>2013/12/23 21:18:00.000.912,F:\Fontes\Framework\trunk\Framework\Utils\uFactoryObject.pas=</Transaction>
+    <Transaction>2013/12/23 21:18:15.000.703,=F:\Fontes\Framework\trunk\Framework\Unit1.pas</Transaction>
+    <Transaction>2013/12/23 21:18:37.000.454,F:\Fontes\Framework\trunk\Framework\Unit1.pas=F:\Fontes\Framework\trunk\Framework\MVPUtils\uMVPUtils.pas</Transaction>
+    <Transaction>2013/12/23 21:19:21.000.978,F:\Fontes\Framework\trunk\Framework\MVPUtils\uMVPUtils.pas=</Transaction>
+    <Transaction>2013/12/23 21:20:55.000.483,F:\Fontes\Framework\trunk\Framework\Utils\uDBConvert.pas=</Transaction>
+    <Transaction>2013/12/23 21:21:04.000.131,F:\Fontes\Framework\trunk\Framework\Utils\uDMSevenZip.pas=</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.094,=vcl.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.106,=vclimg.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.162,=IndyCore.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.120,=xmlrtl.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.154,=IndyProtocols.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.145,=IndySystem.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.128,=dsnap.dcp</Transaction>
+    <Transaction>2013/12/23 21:21:13.000.136,=dbrtl.dcp</Transaction>
+    <Transaction>2013/12/23 21:26:27.879,=F:\Fontes\Framework\trunk\Framework\Constant\uConstantUtils.pas</Transaction>
+  </Transactions>
+</BorlandProject>

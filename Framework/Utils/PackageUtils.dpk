@@ -1,0 +1,59 @@
+package PackageUtils;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclimg,
+  xmlrtl,
+  dsnap,
+  dbrtl,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
+
+contains
+  MD5 in 'MD5.pas',
+  uDMCript in 'uDMCript.pas',
+  uDMException in 'uDMException.pas',
+  uDMFileInfoUtils in 'uDMFileInfoUtils.pas',
+  uDMHash in 'uDMHash.pas',
+  uDMHTTP in 'uDMHTTP.pas',
+  uDMInfoComputer in 'uDMInfoComputer.pas',
+  uDMList in 'uDMList.pas',
+  uDMRegistry in 'uDMRegistry.pas',
+  uDMThreadUtils in 'uDMThreadUtils.pas',
+  uDMUtils in 'uDMUtils.pas',
+  uDMUtilsDao in 'uDMUtilsDao.pas',
+  uDMUtilsImage in 'uDMUtilsImage.pas',
+  uDMUtilsMessage in 'uDMUtilsMessage.pas',
+  uDMValidateProcess in 'uDMValidateProcess.pas',
+  uConstantUtils in '..\Constant\uConstantUtils.pas';
+
+end.

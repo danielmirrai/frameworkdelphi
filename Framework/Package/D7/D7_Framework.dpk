@@ -1,0 +1,141 @@
+package D7_Framework;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Mirrai Framework for Delphi MVP'}
+{$LIBVERSION '1.0'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  dbrtl,
+  xmlrtl,
+  dsnap,
+  dbexpress,
+  vcldb,
+  inet,
+  IndyCore70,
+  IndySystem70,
+  IndyProtocols70,
+  vclx,
+  vclshlctrls,
+  dxCoreD7,
+  dxGDIPlusD7,
+  cxLibraryVCLD7,
+  dxThemeD7,
+  cxEditorsVCLD7,
+  cxDataD7,
+  cxExtEditorsVCLD7,
+  dxBarD7,
+  dxComnD7,
+  dxBarExtItemsD7,
+  dxRibbonD7,
+  cxPageControlVCLD7,
+  cxGridD7,
+  dxSkinsCoreD7,
+  dxSkinscxPCPainterD7,
+  dxSkinsdxBarPainterD7,
+  cxVerticalGridVCLD7,
+  dxPSCoreD7,
+  dxPSLnksD7,
+  dxPScxCommonD7,
+  dxPScxExtCommonD7,
+  dxPScxPCProdD7,
+  dxPsPrVwAdvD7,
+  dxPSPrVwRibbonD7,
+  dxSkinXmas2008BlueD7,
+  dxSkinBlackD7,
+  dxSkinBlueD7,
+  dxSkinCaramelD7,
+  dxSkinCoffeeD7,
+  dxSkinDarkRoomD7,
+  dxSkinDarkSideD7,
+  dxSkinFoggyD7,
+  dxSkinGlassOceansD7,
+  dxSkiniMaginaryD7,
+  dxSkinLilianD7,
+  dxSkinLiquidSkyD7,
+  dxSkinLondonLiquidSkyD7,
+  dxSkinMcSkinD7,
+  dxSkinMoneyTwinsD7,
+  dxSkinOffice2007BlackD7,
+  dxSkinOffice2007BlueD7,
+  dxSkinOffice2007GreenD7,
+  dxSkinOffice2007PinkD7,
+  dxSkinOffice2007SilverD7,
+  dxSkinOffice2010BlackD7,
+  dxSkinOffice2010BlueD7,
+  dxSkinOffice2010SilverD7,
+  dxSkinPumpkinD7,
+  dxSkinSevenD7,
+  dxSkinSharpD7,
+  dxSkinSilverD7,
+  dxSkinSpringTimeD7,
+  dxSkinStardustD7,
+  dxSkinSummer2008D7,
+  dxSkinValentineD7;
+
+contains
+  MidasLib,
+  MD5 in '..\..\Utils\MD5.pas',
+  uDMCript in '..\..\Utils\uDMCript.pas',
+  uDMException in '..\..\Utils\uDMException.pas',
+  uDMFileInfoUtils in '..\..\Utils\uDMFileInfoUtils.pas',
+  uDMHash in '..\..\Utils\uDMHash.pas',
+  uDMHTTP in '..\..\Utils\uDMHTTP.pas',
+  uDMInfoComputer in '..\..\Utils\uDMInfoComputer.pas',
+  uDMList in '..\..\Utils\uDMList.pas',
+  uDMRegistry in '..\..\Utils\uDMRegistry.pas',
+  uDMUtils in '..\..\Utils\uDMUtils.pas',
+  uDMUtilsDao in '..\..\Utils\uDMUtilsDao.pas',
+  uDMUtilsImage in '..\..\Utils\uDMUtilsImage.pas',
+  uDMUtilsMessage in '..\..\Utils\uDMUtilsMessage.pas',
+  uDMValidateProcess in '..\..\Utils\uDMValidateProcess.pas',
+  uFactoryObject in '..\..\Utils\uFactoryObject.pas',
+  uDMThreadUtils in '..\..\Utils\uDMThreadUtils.pas',
+  uConstantUtils in '..\..\Constant\uConstantUtils.pas',
+  uConstantTimeExecuting in '..\..\Constant\uConstantTimeExecuting.pas',
+  uObjectAction in '..\..\ObjectAction\uObjectAction.pas',
+  uObjectDaoCustom in '..\..\ObjectDao\uObjectDaoCustom.pas' {ObjectDaoCustom: TDataModule},
+  uObjectDao in '..\..\ObjectDao\uObjectDao.pas' {ObjectDao: TDataModule},
+  uObjectDaoApplication in '..\..\ObjectDao\uObjectDaoApplication.pas' {ObjectDaoApplication: TDataModule},
+  uObjectActionCustom in '..\..\ObjectAction\uObjectActionCustom.pas',
+  uObjectActionTimeExecuting in '..\..\ObjectAction\uObjectActionTimeExecuting.pas',
+  uObjectDaoTimeExecuting in '..\..\ObjectDao\uObjectDaoTimeExecuting.pas' {ObjectDaoTimeExecuting: TDataModule},
+  uDBConvert in '..\..\ObjectDao\uDBConvert.pas',
+  uFormModelCustom in '..\..\Forms\Model\uFormModelCustom.pas' {FormModelCustom},
+  uFormModel in '..\..\Forms\Model\uFormModel.pas' {FormModel},
+  uFormAddModelCustom in '..\..\Forms\Add\uFormAddModelCustom.pas' {FormAddModelCustom},
+  uFormAddModel in '..\..\Forms\Add\uFormAddModel.pas' {FormAddModel},
+  uFormGridCustom in '..\..\Forms\View\uFormGridCustom.pas' {FormGridCustom},
+  uFormGrid in '..\..\Forms\View\uFormGrid.pas' {FormGrid},
+  uFormViewModelCustom in '..\..\Forms\View\uFormViewModelCustom.pas' {FormViewModelCustom},
+  uFormViewModel in '..\..\Forms\View\uFormViewModel.pas' {FormViewModel},
+  uFormViewTimeExecuting in '..\..\Forms\View\uFormViewTimeExecuting.pas' {FormViewTimeExecuting},
+  uFormAddTimeExecuting in '..\..\Forms\Add\uFormAddTimeExecuting.pas' {FormAddTimeExecuting},
+  uFrameLookupModel in '..\..\Forms\Model\uFrameLookupModel.pas' {FrameLookupModel: TFrame},
+  uFrameworkRegister in '..\..\Utils\uFrameworkRegister.pas';
+
+end.

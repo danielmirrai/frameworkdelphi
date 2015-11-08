@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899/12/30 00:00:00.000.655,=F:\Fontes\Framework\trunk\Framework\Unit1.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.032,=F:\Fontes\Framework\trunk\Framework\Unit1.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.044,=dbrtl.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.351,F:\Fontes\Framework\trunk\Framework\Unit1.pas=F:\Fontes\Framework\trunk\Framework\ObjectDao\uDBConvert.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.145,=IndyProtocols.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.936,=dbexpress.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.588,F:\Fontes\Framework\trunk\Framework\Framework.dproj=F:\Fontes\Framework\trunk\Framework\FrameworkDT.dproj</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.276,F:\Fontes\Framework\trunk\Framework\Framework.dproj=F:\Fontes\Framework\trunk\Framework\Package\XE4\Framework.dproj</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.058,=F:\Fontes\Framework\trunk\Framework\Utils\uDMThreadUtils.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.919,=vcl.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.076,=vcldb.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.472,C:\Users\Daniel\Documents\RAD Studio\Projects\Package1.dproj=F:\Fontes\Framework\trunk\Framework\Package1.dproj</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.915,=DbxCommonDriver.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.600,F:\Fontes\Framework\trunk\Framework\FrameworkDesign.dproj=F:\Fontes\Framework\trunk\Framework\Package1.dproj</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.620,F:\Fontes\Framework\trunk\Framework\Utils\uThreadUtils.pas=</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.220,F:\Fontes\Framework\trunk\Framework\Utils\uThreadUtils.pas=F:\Fontes\Framework\trunk\Framework\Unit1.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.183,=IndyCore.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.530,=F:\Fontes\Framework\trunk\Framework\Constant\uConstantTimeExecuting.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.955,=DBXFirebirdDriver.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.015,=dsnap.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.977,=xmlrtl.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.400,F:\Fontes\Framework\trunk\Framework\FrameworkDT.dproj=F:\Fontes\Framework\trunk\Framework\FrameworkDesign.dproj</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.948,=vclimg.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.962,=F:\Fontes\Framework\trunk\Framework\Constant\uConstantUtils.pas</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.900,=rtl.dcp</Transaction>
+    <Transaction>1899/12/30 00:00:00.000.109,=IndySystem.dcp</Transaction>
+    <Transaction>2014/02/17 19:32:13.000.764,=F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.pas</Transaction>
+    <Transaction>2014/02/17 19:32:33.000.199,F:\Fontes\Projects\PC Mapping\Forms\View\uFormViewTestsRun.dfm=F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.dfm</Transaction>
+    <Transaction>2014/02/17 19:32:33.000.199,F:\Fontes\Projects\PC Mapping\Forms\View\uFormViewTestsRun.pas=F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.pas</Transaction>
+    <Transaction>2014/02/18 20:54:16.000.200,=F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.pas</Transaction>
+    <Transaction>2014/02/18 20:54:39.000.502,F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.dfm=F:\Fontes\Projects\Framework\trunk\Framework\Forms\Model\uFrameLookupModel.dfm</Transaction>
+    <Transaction>2014/02/18 20:54:39.000.502,F:\Fontes\Projects\Framework\trunk\Framework\Package\XE4\Unit1.pas=F:\Fontes\Projects\Framework\trunk\Framework\Forms\Model\uFrameLookupModel.pas</Transaction>
+    <Transaction>2014/02/20 20:00:21.000.287,F:\Fontes\Projects\Framework\trunk\Framework\Forms\Model\uFrameLookupModel.pas=</Transaction>
+  </Transactions>
+</BorlandProject>
