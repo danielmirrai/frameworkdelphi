@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/12/24 16:29:16.000.400,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/03/29 20:02:15.000.160,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/07/14 19:33:26.448,=C:\Users\Daniel\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/07/14 19:33:37.488,=C:\Users\Daniel\Desktop\Simulador Venda\uFormSimuladorVenda.pas</Transaction>
+    <Transaction>2014/07/14 19:34:05.206,C:\Users\Daniel\Desktop\Simulador Venda\SimuladorVenda.dproj=C:\Users\Daniel\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2014/07/14 19:37:03.994,=C:\Users\Daniel\Desktop\Simulador Venda\Form\uFormSimuladorVenda.pas</Transaction>
+    <Transaction>2014/07/14 19:38:02.026,=C:\Users\Daniel\Desktop\Simulador Venda\Unit1.pas</Transaction>
+    <Transaction>2014/07/14 19:38:19.467,C:\Users\Daniel\Desktop\Simulador Venda\Regra\uSimuladorVenda.pas=C:\Users\Daniel\Desktop\Simulador Venda\Unit1.pas</Transaction>
+    <Transaction>2014/07/14 19:38:30.402,C:\Users\Daniel\Desktop\Simulador Venda\Regra\uRegraSimuladorVenda.pas=C:\Users\Daniel\Desktop\Simulador Venda\Regra\uSimuladorVenda.pas</Transaction>
+  </Transactions>
+</BorlandProject>
