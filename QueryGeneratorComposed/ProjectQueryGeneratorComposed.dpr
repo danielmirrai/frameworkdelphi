@@ -1,8 +1,11 @@
 program ProjectQueryGeneratorComposed;
 
+{%ToDo 'ProjectQueryGeneratorComposed.todo'}
+
 uses
   Forms,
   uObjectDaoApplication,
+  uFormMain,
   uFormAddFields in 'Forms\Add\uFormAddFields.pas' {FormAddFields},
   uFormAddReferenceFK in 'Forms\Add\uFormAddReferenceFK.pas' {FormAddReferenceFK},
   uObjectDaoFields in 'ObjectDao\uObjectDaoFields.pas' {ObjectDaoFields: TDataModule},
@@ -14,17 +17,14 @@ uses
   uObjectDaoAplicacaoQuery in 'ObjectDao\uObjectDaoAplicacaoQuery.pas' {ObjectDaoAplicacaoQuery: TDataModule},
   uFormViewFields in 'Forms\View\uFormViewFields.pas' {FormViewFields},
   uFormViewReferenceFK in 'Forms\View\uFormViewReferenceFK.pas' {FormViewReferenceFK},
-  uFormMain in '..\Framework\Forms\Model\uFormMain.pas' {FormMain},
   uFormMainQuery in 'Forms\Model\uFormMainQuery.pas' {FormMainQuery};
 
 {$R *.res}
 
-var
-  FormMainQuery: TFormMainQuery;
 begin
   Application.Initialize;
-  Application.CreateForm(TObjectDaoAplicacaoQuery, ObjectDaoApplication);
-  Application.CreateForm(TFormMainQuery, FormMainQuery);
+  Application.CreateForm(TObjectDaoApplication, ObjectDaoApplication);
+  Application.CreateForm(TFormMainQuery, FormMain);
   Application.Title := 'Gerador de query composta';
   Application.Run;
 end.
