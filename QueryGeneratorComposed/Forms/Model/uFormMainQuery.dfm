@@ -79,6 +79,7 @@ inherited FormMainQuery: TFormMainQuery
           Text = 'Colunas das tabelas vinculadas a tabela estrangeira'
         end
         item
+          State = cbsChecked
           Text = 'Somente campo "Nome\Descri'#231#227'o" da PK'
         end
         item
@@ -142,7 +143,6 @@ inherited FormMainQuery: TFormMainQuery
           Text = 'Rela'#231#227'o 1 para N (Um para muitos)'
         end
         item
-          State = cbsChecked
           Text = 'Rela'#231#227'o N para N (Muitos para muitos)'
         end>
       TabOrder = 1

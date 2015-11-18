@@ -11,6 +11,12 @@ inherited FormAddReferenceFK: TFormAddReferenceFK
   inherited gb_Navegate: TcxGroupBox
     Top = 211
     Width = 397
+    inherited btn_Cancel: TcxButton
+      Left = 283
+    end
+    inherited btn_Confirm: TcxButton
+      Left = 172
+    end
   end
   inherited dsDados: TDataSource
     Left = 336

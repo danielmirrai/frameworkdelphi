@@ -97,28 +97,26 @@ var
   sSQLFrom, sSQLJoin, sSQLWhere, sSQLOrder: string;
   FCloneDataSetReference: TClientDataSet;
   FileReturn, ListaFieldFK, ListaFieldReferenceFK, ListaAlias: TStringList;
-          
+           
+
   function FieldIsNotNull: Boolean;
   begin
     Result := (TDMUtils.VarToInt(FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosNULLFLAG.AsVariant) = 1);
   end;
 
   function ValidaReferenciaCampo(const NomeTabela, NomeField, TipoConstraint: String): Boolean;
-  var
-    TempListaFieldFK: TStringList;
   begin
     Result := False;
-    if FCloneDataSetReference.Locate('TABLEORIGEM;CONSTRAINT_TYPE', VarArrayOf([NomeTabela,TipoConstraint]),
-      [loCaseInsensitive]) then
+    FCloneDataSetReference.Filtered := False;
+    FCloneDataSetReference.Filter := Format('((TABLEORIGEM = %s) and (CONSTRAINT_TYPE = %s))', [QuotedStr(NomeTabela), QuotedStr(TipoConstraint)]);
+    FCloneDataSetReference.Filtered := True;
+    FCloneDataSetReference.First;
+    while not FCloneDataSetReference.Eof do
     begin
-      TempListaFieldFK := TStringList.Create;
-      try
-        TempListaFieldFK.Text := FCloneDataSetReference.FieldByName('FIELDNAMEORIGEM').AsString;
-        TDMUtils.ExplodeStr(TempListaFieldFK, ';');
-        Result := TempListaFieldFK.IndexOf(NomeField) > -1;
-      finally
-        FreeAndNil(TempListaFieldFK);
-      end;
+      Result := TDMUtils.CompareIgnoreCase(FCloneDataSetReference.FieldByName('FIELDNAMEORIGEM').AsString, NomeField);
+      if Result then
+        Break;
+      FCloneDataSetReference.Next;
     end;
   end;
 
@@ -141,6 +139,11 @@ var
   function IsFK(const NomeTabela, NomeField: String): Boolean;
   begin
     Result := ValidaReferenciaCampo(NomeTabela, NomeField, 'FOREIGN KEY');
+  end;
+
+  function IsPKorFK(const NomeTabela, NomeField: String): Boolean;
+  begin
+    Result := IsPK(NomeTabela, NomeField) or IsFK(NomeTabela, NomeField);
   end;
 
   procedure LimparDirSQL;
@@ -185,8 +188,6 @@ var
     NomeTabelaOwner.Clear;
   end;
                
-
-
   function EhTipoNumerico: Boolean;
   begin       
     Result := TDMUtils.InString(FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosDCFIELDTYPE.AsString,
@@ -620,118 +621,90 @@ var
       end;
     end;
 
-    procedure AdicionaColunasPK;
+   procedure AdicionaColunas(const aAlias: String; const EhFK, PermiteAddTodosCampo: Boolean; var bCanAddDisplayFieldOfReference: Boolean;
+      const aTableName: String);
     var
-      bOldFiltered: Boolean;
+      bOldFiltered, bAdicionouCampo: Boolean;
       sOldFilter: string;
-
-      procedure InternalAddSQLField;
-      begin
-        AddSQLField(TDMUtils.IIf(EhEstruturaOwer, sAliasReference, sAliasPK), EhTabelaVinculada, True, False);
+          
+      procedure InternalAddSQLField(const IsDescription: BOolean = False);
+      begin       
+        bAdicionouCampo := True;
+        if IsDescription then
+          bCanAddDisplayFieldOfReference := False;
+        AddSQLField(aAlias, EhTabelaVinculada, IsDescription, EhFK);
       end;
     begin
-      PermiteIncluirFK := False;
+      bAdicionouCampo := False;
       bOldFiltered := FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered;
       sOldFilter := FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := '(TABLENAME = ' + QuotedStr(FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString) + ')';
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := True;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.First;
-
-      while not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof do
-      begin
-        //Eh PK
-        if (FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosTABLENAME.AsString = FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString) then
-        begin
-          if ((EhEstruturaOwer or (not EhTabelaVinculada)) and (sOldTabela <> FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString)) then
-          begin
-            if bCanAddDisplayFieldOfReferencePK and TDMUtils.CompareIgnoreCase(FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosDCFIELDTYPE.AsString, 'VARCHAR') then
-            begin
-              bCanAddDisplayFieldOfReferencePK := False;
-              InternalAddSQLField;
-            end
-            else
-            if (((not EhEstruturaOwer) and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaPK)) or
-               (EhEstruturaOwer and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaVinculadaFK))) then
-              InternalAddSQLField;
-          end;
-
-          if (not EhTabelaVinculada) or OwnerPermiteIncluirFK then
-            AddJoins; //Adiciona inner joins
-        end;
-        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
-      end;
-      if bCanAddDisplayFieldOfReferencePK then
-      begin
+      try
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := '(TABLENAME = ' + QuotedStr(aTableName) + ')';
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := True;
         FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.First;
-        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
-        if not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof then
+          
+        while not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof do
         begin
-          bCanAddDisplayFieldOfReferencePK := False;
-          InternalAddSQLField;
+          if (EhFK or ((EhEstruturaOwer or (not EhTabelaVinculada)) and
+            (sOldTabela <> FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString))) then
+          begin
+            if bCanAddDisplayFieldOfReference and EhTipoTexto then
+              InternalAddSQLField(True)
+            else
+            if PermiteAddTodosCampo then
+              InternalAddSQLField;
+          end;          
+            
+          if (not EhFK) and ((not EhTabelaVinculada) or OwnerPermiteIncluirFK) then
+            AddJoins; //Adiciona inner joins
+          FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
         end;
+             
+        if (((not PermiteAddTodosCampo) and (not bAdicionouCampo) and bCanAddDisplayFieldOfReference)
+          and (EhFK or (((EhEstruturaOwer or (not EhTabelaVinculada)) and
+         (sOldTabela <> FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString))))) then
+        begin
+          FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.First;
+          FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
+          while not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof do
+          begin
+            if not IsPKorFK(FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosTABLENAME.AsString,
+              FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosFIELDNAME.AsString) then
+            begin
+              InternalAddSQLField;
+              Break;
+            end;
+            FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
+          end;
+        end;
+      finally
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := sOldFilter;
+        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := bOldFiltered;
       end;
-
-                                                                                                  
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;    
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := sOldFilter;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := bOldFiltered;
-    end;
+    end; 
     
     procedure AdicionaColunasFK;
-    var
-      bOldFiltered: Boolean;
-      sOldFilter: string;
-          
-      procedure InternalAddSQLField;
-      begin
-          AddSQLField(sAliasReference, EhTabelaVinculada, True, True);
-      end;
     begin
-      if (not PermiteIncluirFK) or EhEstruturaOwer then
-        Exit;
-      bOldFiltered := FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered;
-      sOldFilter := FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter;
-      
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := '(TABLENAME = ' + QuotedStr(FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEREFERENCE.AsString) + ')';
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := True;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.First;
-      
-      while not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof do
-      begin
-        if bCanAddDisplayFieldOfReferenceFK and TDMUtils.CompareIgnoreCase(FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDadosDCFIELDTYPE.AsString, 'VARCHAR') then
-        begin
-          bCanAddDisplayFieldOfReferenceFK := False;
-          InternalAddSQLField;
-        end
-        else
-         if ((EhTabelaVinculada and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaVinculadaFK)) or
-          ((not EhTabelaVinculada) and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaFK))) then
-          InternalAddSQLField;
-        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
-      end;
-             
-      if bCanAddDisplayFieldOfReferenceFK then
-      begin
-        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.First;
-        FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Next;
-        if not FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Eof then
-        begin         
-          bCanAddDisplayFieldOfReferenceFK := False;
-          InternalAddSQLField;
-        end;
-      end;
-                                                                                           
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := False;    
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filter := sOldFilter;
-      FObjectActionReferenceFK.FObjectActionFields.FObjectDaoFields.CDSDados.Filtered := bOldFiltered;
+      AdicionaColunas(sAliasReference, True, ((EhTabelaVinculada and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaVinculadaFK)) or
+        ((not EhTabelaVinculada) and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaFK))),
+          bCanAddDisplayFieldOfReferenceFK, FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEREFERENCE.AsString);
     end;
-          
+    
+    procedure AdicionaColunasPK;
+    begin  
+      AdicionaColunas(TDMUtils.IIf(EhEstruturaOwer, sAliasReference, sAliasPK), False,
+       (((not EhEstruturaOwer) and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaPK)) or
+             (EhEstruturaOwer and (not FConfigUser.FColunasShow.FSomenteCampoDescricaoDaVinculadaFK))),
+          bCanAddDisplayFieldOfReferencePK, FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString);
+    end;
+
     procedure ValidateFields;
     begin
-      AdicionaColunasPK;
-      AdicionaColunasFK;
+      AdicionaColunasPK; 
+      if (PermiteIncluirFK or EhEstruturaOwer) then
+        AdicionaColunasFK;
     end;
 
     procedure AddSubTables;  
@@ -872,7 +845,7 @@ var
       FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDados.First;
       while not FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDados.Eof do
       begin
-      //  if FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString = 'PEDIDO' then
+      //  if FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDadosTABLEORIGEM.AsString = 'TIPO_PESSOA' then
           ValidateTable(1, False);
         FObjectActionReferenceFK.FObjectDaoReferenceFK.CDSDados.Next;
       end;

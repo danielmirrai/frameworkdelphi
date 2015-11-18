@@ -15,6 +15,10 @@ uses
 
 type
   TFormViewReferenceFK = class(TFormViewModel)
+    btnFields: TcxButton;
+    actCamposTabelaOrigem: TAction;
+    btnCampoTabelaReferencia: TcxButton;
+    actCamposTabelaReferencia: TAction;
   protected 
     procedure Edit; Override;
   public
