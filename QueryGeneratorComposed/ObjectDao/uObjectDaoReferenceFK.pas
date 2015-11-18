@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, uObjectDao, DB, 
-  uDMRTTI, FMTBcd, Provider, SqlExpr, DBClient, uObjectDaoAplicacaoQuery;
+  uDMClasses, FMTBcd, Provider, SqlExpr, DBClient, uObjectDaoAplicacaoQuery;
 
 type
   TObjectDaoReferenceFK = class(TObjectDao)
@@ -38,7 +38,7 @@ implementation
 { TObjectDaoReferenceFK }
 
 initialization
-  DMRTTI.RegisterClass(TObjectDaoReferenceFK);
+  DMClasses.RegisterClass(TObjectDaoReferenceFK);
 
 
 end.

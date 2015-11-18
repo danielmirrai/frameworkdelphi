@@ -4,7 +4,7 @@ interface
 
 uses
   uObjectAction, uObjectDaoFields, Classes, Forms, SysUtils, uConstantFields, 
-  uDMRTTI, uConstantUtils, uDMUtils;
+  uDMClasses, uConstantUtils, uDMUtils;
 
 type
   TObjectActionFields = Class(TObjectAction)
@@ -22,6 +22,6 @@ begin
 end;
 
 initialization
-  DMRTTI.RegisterClass(TObjectActionFields);
+  DMClasses.RegisterClass(TObjectActionFields);
 
 end.

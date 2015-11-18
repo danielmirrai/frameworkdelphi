@@ -25,6 +25,12 @@ inherited ObjectDaoFields: TObjectDaoFields
         Name = 'DCFIELDTYPE'
         DataType = ftString
         Size = 9
+      end
+      item
+        Name = 'FIELD_SOURCE'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 93
       end>
     object CDSDadosTABLENAME: TStringField
       FieldName = 'TABLENAME'
@@ -46,11 +52,16 @@ inherited ObjectDaoFields: TObjectDaoFields
       FieldName = 'DCFIELDTYPE'
       Size = 9
     end
+    object CDSDadosFIELD_SOURCE: TStringField
+      FieldName = 'FIELD_SOURCE'
+      FixedChar = True
+      Size = 93
+    end
   end
   inherited SQLDADOS: TSQLDataSet
     CommandText = 
-      'select TABLENAME, FIELDNAME, NULLFLAG, FIELDTYPE, DCFIELDTYPE fr' +
-      'om SHOWLISTFIELDDB'
+      'select TABLENAME, FIELDNAME, NULLFLAG, FIELDTYPE, DCFIELDTYPE, F' +
+      'IELD_SOURCE from SHOWLISTFIELDDB'
     CommandType = ctQuery
     SQLConnection = ObjectDaoAplicacaoQuery.FBConnection
     object SQLDADOSTABLENAME: TStringField
@@ -72,6 +83,11 @@ inherited ObjectDaoFields: TObjectDaoFields
     object SQLDADOSDCFIELDTYPE: TStringField
       FieldName = 'DCFIELDTYPE'
       Size = 9
+    end
+    object SQLDADOSFIELD_SOURCE: TStringField
+      FieldName = 'FIELD_SOURCE'
+      FixedChar = True
+      Size = 93
     end
   end
 end

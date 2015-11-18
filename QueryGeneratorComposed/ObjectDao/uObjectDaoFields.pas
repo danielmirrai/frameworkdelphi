@@ -3,7 +3,7 @@ unit uObjectDaoFields;
 interface
 
 uses
-  uDMRTTI, SysUtils, Classes, uObjectDaoAplicacaoQuery, uObjectDao, DB, DBClient, FMTBcd, Provider, SqlExpr;
+  uDMClasses, SysUtils, Classes, uObjectDaoAplicacaoQuery, uObjectDao, DB, DBClient, FMTBcd, Provider, SqlExpr;
 
 type
   TObjectDaoFields = class(TObjectDao)
@@ -17,6 +17,8 @@ type
     CDSDadosNULLFLAG: TStringField;
     CDSDadosFIELDTYPE: TStringField;
     CDSDadosDCFIELDTYPE: TStringField;
+    SQLDADOSFIELD_SOURCE: TStringField;
+    CDSDadosFIELD_SOURCE: TStringField;
   private
     { Private declarations }
 
@@ -33,7 +35,7 @@ implementation
 { TObjectDaoFields }
 
 initialization
-  DMRTTI.RegisterClass(TObjectDaoFields);
+  DMClasses.RegisterClass(TObjectDaoFields);
 
 
 end.

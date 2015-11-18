@@ -8,7 +8,7 @@ uses
   cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, dxSkinBlack, dxSkinsDefaultPainters, Menus, DB,
-  uDMRTTI, cxPropertiesStore, Classes, ActnList, StdCtrls, cxButtons, cxGroupBox;
+  uDMClasses, cxPropertiesStore, Classes, ActnList, StdCtrls, cxButtons, cxGroupBox;
 
 type
   TFormAddReferenceFK = Class(TFormAddModel)
@@ -33,6 +33,6 @@ begin
 end;
 
 initialization
-  DMRTTI.RegisterClass(TFormAddReferenceFK);
+  DMClasses.RegisterClass(TFormAddReferenceFK);
 
 end.

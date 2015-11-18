@@ -11,7 +11,7 @@ uses
   cxPropertiesStore, cxGridCustomPopupMenu, cxGridPopupMenu, ActnList,
   StdCtrls, cxButtons, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  uDMRTTI, cxGroupBox;
+  uDMClasses, cxGroupBox;
 
 type
   TFormViewFields = class(TFormViewModel)
@@ -34,6 +34,6 @@ begin
 end;
 
 initialization
-  DMRTTI.RegisterClass(TFormViewFields);
+  DMClasses.RegisterClass(TFormViewFields);
 
 end.

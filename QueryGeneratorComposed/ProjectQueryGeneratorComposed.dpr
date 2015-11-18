@@ -5,7 +5,6 @@ program ProjectQueryGeneratorComposed;
 uses
   Forms,
   uObjectDaoApplication,
-  uFormMain,
   uFormAddFields in 'Forms\Add\uFormAddFields.pas' {FormAddFields},
   uFormAddReferenceFK in 'Forms\Add\uFormAddReferenceFK.pas' {FormAddReferenceFK},
   uObjectDaoFields in 'ObjectDao\uObjectDaoFields.pas' {ObjectDaoFields: TDataModule},
@@ -17,7 +16,10 @@ uses
   uObjectDaoAplicacaoQuery in 'ObjectDao\uObjectDaoAplicacaoQuery.pas' {ObjectDaoAplicacaoQuery: TDataModule},
   uFormViewFields in 'Forms\View\uFormViewFields.pas' {FormViewFields},
   uFormViewReferenceFK in 'Forms\View\uFormViewReferenceFK.pas' {FormViewReferenceFK},
-  uFormMainQuery in 'Forms\Model\uFormMainQuery.pas' {FormMainQuery};
+  uFormMainQuery in 'Forms\Model\uFormMainQuery.pas' {FormMainQuery},
+  uObjectActionQueryBuilder in 'ObjectAction\uObjectActionQueryBuilder.pas',
+  uConstantQueryBuilder in 'Constant\uConstantQueryBuilder.pas',
+  uFormMain;
 
 {$R *.res}
 

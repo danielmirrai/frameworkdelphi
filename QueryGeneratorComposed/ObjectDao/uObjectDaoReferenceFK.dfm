@@ -1,4 +1,6 @@
 inherited ObjectDaoReferenceFK: TObjectDaoReferenceFK
+  Left = 644
+  Top = 157
   inherited CDSDados: TClientDataSet
     FieldDefs = <
       item
@@ -69,7 +71,8 @@ inherited ObjectDaoReferenceFK: TObjectDaoReferenceFK
     CommandText = 
       'select TABLEORIGEM, INDEXORIGEM, FIELDNAMEORIGEM, TABLEREFERENCE' +
       ', INDEXREFERENCE, FIELDNAMEREFERENCE, CONSTRAINT_TYPE from SHOWD' +
-      'BDEPENDENCE where CONSTRAINT_TYPE = '#39'FOREIGN KEY'#39
+      'BDEPENDENCE where CONSTRAINT_TYPE in('#39'FOREIGN KEY'#39', '#39'PRIMARY KEY' +
+      #39', '#39'UNIQUE'#39')'
     CommandType = ctQuery
     object SQLDADOSTABLEORIGEM: TStringField
       FieldName = 'TABLEORIGEM'

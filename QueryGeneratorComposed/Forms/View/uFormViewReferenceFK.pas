@@ -11,10 +11,12 @@ uses
   cxPropertiesStore, cxGridCustomPopupMenu, cxGridPopupMenu, ActnList,
   StdCtrls, cxButtons, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  uDMRTTI, cxGroupBox, cxTextEdit, cxLabel;
+  uDMClasses, cxGroupBox, cxTextEdit, cxLabel;
 
 type
   TFormViewReferenceFK = class(TFormViewModel)
+  protected 
+    procedure Edit; Override;
   public
     { Public declarations }
     FFormAddReferenceFK: TFormAddReferenceFK;
@@ -34,7 +36,12 @@ begin
   FFormAddReferenceFK := GetFormAddModel as TFormAddReferenceFK;
 end;
 
+procedure TFormViewReferenceFK.Edit;
+begin
+  
+end;
+
 initialization
-  DMRTTI.RegisterClass(TFormViewReferenceFK);
+  DMClasses.RegisterClass(TFormViewReferenceFK);
 
 end.

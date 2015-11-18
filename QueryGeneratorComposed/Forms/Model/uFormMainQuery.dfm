@@ -1,7 +1,9 @@
 inherited FormMainQuery: TFormMainQuery
-  Left = -1114
+  Left = 0
+  Top = 101
   Width = 1103
-  Height = 546
+  Height = 572
+  Caption = 'Principal'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
@@ -11,46 +13,18 @@ inherited FormMainQuery: TFormMainQuery
     Align = alClient
     PanelStyle.Active = True
     TabOrder = 0
-    Height = 495
+    Height = 521
     Width = 1095
-    object lbl6: TLabel
-      Left = 392
-      Top = 64
-      Width = 433
-      Height = 97
-      AutoSize = False
-      Caption = 
-        'Info dos n'#237'veis joins:'#13#10'-1'#186' = Todas as tabelas filhas ser'#227'o list' +
-        'adas. '#13#10' 0'#186' = Somente a tabela pr'#237'ncipal ser'#225' listada'#13#10' 1'#186' = Som' +
-        'ente as tabelas vinculadas a tabela princ'#237'pal ser'#227'o listadas. '#13#10 +
-        ' 2'#186' = Somente as tabelas vinculadas a tabela vinculada a tabela ' +
-        'a princ'#237'pal ser'#227'o listadas. '#13#10' 3'#186' = Somente as tabelas vinculada' +
-        's a tabela vinculada a tabela a princ'#237'pal ser'#227'o listadas. '#13#10' 4'#186',' +
-        ' 5'#186', 6'#186'.. Sem limite definido.'#13#10
-      WordWrap = True
-    end
-    object edtNivelJoinWichSubTables: TcxTextEdit
-      Left = 392
-      Top = 40
-      Hint = 
-        'Busca joins de tabelas filhas.'#13#10#13#10'Definir o n'#237'vel m'#225'ximo.'#13#10#13#10'0 =' +
-        ' Nenhum'
-      TabOrder = 0
-      Text = '-1'
-      Width = 121
-    end
     object cxNivelJoins: TcxLabel
-      Left = 392
+      Left = 368
       Top = 16
-      Caption = 
-        'Quantidade de n'#237'veis joins (Tabelas vinculadas a tabela estrange' +
-        'ira)'
+      Caption = 'Profundidade dos joins (n'#237'veis)'
     end
     object lstColunasExibidas: TcxCheckListBox
       Left = 24
-      Top = 192
+      Top = 184
       Width = 329
-      Height = 249
+      Height = 281
       Items = <
         item
           State = cbsChecked
@@ -90,6 +64,10 @@ inherited FormMainQuery: TFormMainQuery
         end
         item
           State = cbsChecked
+          Text = 'Tipo Data'
+        end
+        item
+          State = cbsChecked
           Text = 'Colunas da Tabela Princ'#237'pal'
         end
         item
@@ -101,27 +79,32 @@ inherited FormMainQuery: TFormMainQuery
           Text = 'Colunas das tabelas vinculadas a tabela estrangeira'
         end
         item
-          State = cbsChecked
-          Text = 'Outros'
+          Text = 'Somente campo "Nome\Descri'#231#227'o" da PK'
         end
         item
           State = cbsChecked
-          Text = 'Somente campo Nome (PK)'
+          Text = 'Somente campo "Nome\Descri'#231#227'o" da FK'
         end
         item
           State = cbsChecked
-          Text = 'Somente campo Nome (FK)'
+          Text = 'Somente campo "Nome\Descri'#231#227'o" da tabela vinculada '#225' FK'
+        end
+        item
+          Text = 'PK da tabela estrangeira'
+        end
+        item
+          Text = 'PK da tabela tabela vinculada '#225' FK'
         end
         item
           State = cbsChecked
-          Text = 'Somente campo Nome (Vinculada '#225' FK)'
+          Text = 'Outros (Campos que n'#227'o se enquadram na lista acima.)'
         end>
       TabOrder = 2
     end
     object cxLabel2: TcxLabel
       Left = 24
-      Top = 168
-      Caption = 'Colunas que ser'#227'o exibidas:'
+      Top = 165
+      Caption = 'Colunas que ser'#227'o exibidas: (Configura'#231#227'o excludente)'
     end
     object lstTabelasExibir: TcxCheckListBox
       Left = 24
@@ -149,39 +132,38 @@ inherited FormMainQuery: TFormMainQuery
         item
           State = cbsChecked
           Text = 'Tabela vinculada a tabela estrangeira (Left Join)'
+        end
+        item
+          State = cbsChecked
+          Text = 'Rela'#231#227'o 1 para 1'
+        end
+        item
+          State = cbsChecked
+          Text = 'Rela'#231#227'o 1 para N (Um para muitos)'
+        end
+        item
+          State = cbsChecked
+          Text = 'Rela'#231#227'o N para N (Muitos para muitos)'
         end>
-      TabOrder = 4
+      TabOrder = 1
     end
     object cxTabelasJoins: TcxLabel
       Left = 24
       Top = 48
       Caption = 'Tabelas que ser'#227'o efetuado join:'
     end
-    object cbbTipoScript: TComboBox
-      Left = 96
-      Top = 16
-      Width = 145
-      Height = 21
-      ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 6
-      Text = 'Select'
-      Items.Strings = (
-        'Select'
-        'View')
-    end
     object cxLabel4: TcxLabel
       Left = 16
       Top = 16
       Caption = 'Tipo do Script:'
     end
-    object cxGroupBox1: TcxGroupBox
-      Left = 392
-      Top = 171
+    object cxPersonalizacaoQuery: TcxGroupBox
+      Left = 368
+      Top = 40
       Align = alCustom
       Caption = 'Personalize o consulta gerada'
-      TabOrder = 8
-      Height = 273
+      TabOrder = 5
+      Height = 423
       Width = 689
       object lblSelect: TLabel
         Left = 24
@@ -197,9 +179,9 @@ inherited FormMainQuery: TFormMainQuery
         ParentFont = False
       end
       object lbl1: TLabel
-        Left = 256
+        Left = 260
         Top = 40
-        Width = 169
+        Width = 161
         Height = 65
         AutoSize = False
         Caption = 
@@ -235,9 +217,9 @@ inherited FormMainQuery: TFormMainQuery
         Caption = '3'#186' Personalize adicionando condi'#231#245'es'
       end
       object lblWhere: TLabel
-        Left = 16
+        Left = 24
         Top = 120
-        Width = 41
+        Width = 33
         Height = 17
         AutoSize = False
         Caption = 'where'
@@ -301,7 +283,7 @@ inherited FormMainQuery: TFormMainQuery
         Caption = '5'#186' Personalize having'
       end
       object Label4: TLabel
-        Left = 8
+        Left = 16
         Top = 202
         Width = 41
         Height = 17
@@ -315,169 +297,247 @@ inherited FormMainQuery: TFormMainQuery
         ParentFont = False
         WordWrap = True
       end
-      object mmoInstrucaoAntesColunas: TMemo
+      object lbl6: TLabel
+        Left = 5
+        Top = 282
+        Width = 57
+        Height = 41
+        AutoSize = False
+        Caption = 'Colunas calculadas'
+        WordWrap = True
+      end
+      object mmoSQLUserSelect: TMemo
         Left = 64
         Top = 40
         Width = 185
         Height = 65
         Lines.Strings = (
           'distinct')
+        ScrollBars = ssVertical
         TabOrder = 0
       end
-      object mmoInstrucaoDepoisJoins: TMemo
+      object mmoSQLUserJoin: TMemo
         Left = 432
         Top = 40
-        Width = 185
+        Width = 249
         Height = 65
+        ScrollBars = ssVertical
         TabOrder = 1
       end
-      object mmoCondicao: TMemo
+      object mmoSQLUserWhere: TMemo
         Left = 64
         Top = 120
-        Width = 185
+        Width = 313
         Height = 65
+        ScrollBars = ssVertical
         TabOrder = 2
       end
-      object mmo: TMemo
+      object mmoSQLUserOrderBy: TMemo
         Left = 432
         Top = 202
-        Width = 185
+        Width = 249
         Height = 65
         Lines.Strings = (
           '1 asc')
-        TabOrder = 3
-      end
-      object Memo1: TMemo
-        Left = 432
-        Top = 120
-        Width = 185
-        Height = 65
-        TabOrder = 4
-      end
-      object Memo2: TMemo
-        Left = 64
-        Top = 202
-        Width = 185
-        Height = 65
+        ScrollBars = ssVertical
         TabOrder = 5
       end
-    end
-    object lstCalculados: TcxCheckListBox
-      Left = 840
-      Top = 64
-      Width = 249
-      Height = 94
-      TabStop = False
-      IntegralHeight = True
-      Items = <
-        item
-          Enabled = False
-          Text = 'Agrupar por Ano'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por campos do tipo Check'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por Data'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por Data Hora'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por Data Hora Minuto'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por Dia'
-        end
-        item
-          Enabled = False
-          State = cbsChecked
-          Text = 'Agrupar por FK'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por Hor'#225'rio'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por M'#234's'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por M'#234's\Ano'
-        end
-        item
-          Enabled = False
-          Text = 'Agrupar por todos campos'
-        end
-        item
-          Enabled = False
-          Text = 'M'#225'ximo de colunas do tipo valor'
-        end
-        item
-          Enabled = False
-          Text = 'M'#233'dia de colunas do tipo valor'
-        end
-        item
-          Enabled = False
-          Text = 'M'#237'nimo de colunas do tipo valor'
-        end
-        item
-          Enabled = False
-          Text = 'Quantidade de registro agrupados'
-        end
-        item
-          Enabled = False
-          Text = 'Somar colunas do tipo inteiro'
-        end
-        item
-          Enabled = False
-          Text = 'Somar colunas do tipo valor'
-        end
-        item
-          Enabled = False
-          Text = 'Varia'#231#227'o de colunas do tipo valor'
-        end>
-      ReadOnly = True
-      TabOrder = 9
-    end
-    object cxLabel5: TcxLabel
-      Left = 832
-      Top = 32
-      Caption = 'Colunas calculadas'
+      object mmoSQLUserGroupBy: TMemo
+        Left = 432
+        Top = 120
+        Width = 249
+        Height = 65
+        ScrollBars = ssVertical
+        TabOrder = 3
+      end
+      object mmoSQLUserHaving: TMemo
+        Left = 64
+        Top = 202
+        Width = 313
+        Height = 65
+        ScrollBars = ssVertical
+        TabOrder = 4
+      end
+      object lstCalculados: TcxCheckListBox
+        Left = 64
+        Top = 280
+        Width = 617
+        Height = 139
+        TabStop = False
+        Enabled = False
+        IntegralHeight = True
+        Items = <
+          item
+            Enabled = False
+            Text = 'Agrupar por Ano'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por campos do tipo Check'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por Data'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por Data Hora'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por Data Hora Minuto'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por Dia'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por FK'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por Hor'#225'rio'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por M'#234's'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por M'#234's\Ano'
+          end
+          item
+            Enabled = False
+            Text = 'Agrupar por todos campos'
+          end
+          item
+            Enabled = False
+            Text = 'M'#225'ximo de colunas do tipo valor'
+          end
+          item
+            Enabled = False
+            Text = 'M'#233'dia de colunas do tipo valor'
+          end
+          item
+            Enabled = False
+            Text = 'M'#237'nimo de colunas do tipo valor'
+          end
+          item
+            Enabled = False
+            Text = 'Quantidade de registro agrupados'
+          end
+          item
+            Enabled = False
+            Text = 'Somar colunas do tipo inteiro'
+          end
+          item
+            Enabled = False
+            Text = 'Somar colunas do tipo valor'
+          end
+          item
+            Enabled = False
+            Text = 'Varia'#231#227'o de colunas do tipo valor'
+          end>
+        ReadOnly = True
+        TabOrder = 6
+      end
     end
     object cxRodape: TcxGroupBox
       Left = 2
-      Top = 449
+      Top = 474
       Align = alBottom
-      TabOrder = 11
-      Height = 44
+      PanelStyle.Active = True
+      TabOrder = 10
+      Height = 45
       Width = 1091
       object btnTodos: TcxButton
-        Left = 664
-        Top = 12
+        Left = 661
+        Top = 8
         Width = 209
         Height = 29
         Cursor = crHandPoint
         Action = actGeneretorSQL
         DragCursor = crHandPoint
         TabOrder = 0
+        TabStop = False
       end
       object btnGeneretorSQL: TcxButton
-        Left = 880
-        Top = 12
+        Left = 877
+        Top = 8
         Width = 209
         Height = 29
         Cursor = crHandPoint
         Action = actFullScript
         DragCursor = crHandPoint
         TabOrder = 1
+        TabStop = False
       end
+      object btnTestaScripts: TcxButton
+        Left = 445
+        Top = 8
+        Width = 209
+        Height = 29
+        Cursor = crHandPoint
+        Action = actTestaScripts
+        DragCursor = crHandPoint
+        TabOrder = 2
+        TabStop = False
+      end
+      object chkAbrirSQLGerado: TcxCheckBox
+        Left = 320
+        Top = 16
+        Caption = 'Abrir SQL Gerado'
+        TabOrder = 3
+        Width = 121
+      end
+    end
+    object cbbNiveisJoin: TcxComboBox
+      Left = 528
+      Top = 16
+      Properties.DropDownListStyle = lsEditFixedList
+      Properties.Items.Strings = (
+        '-1. "Todos" (Todas as tabelas filhas ser'#227'o listadas).'
+        '0. "Nenhum" (Somente a tabela pr'#237'ncipal ser'#225' listada).'
+        
+          '1. "Ligua'#231#227'o direta" (Somente as tabelas s'#227'o FK da tabela princ'#237 +
+          'pal ser'#227'o listadas).'
+        
+          '2. "Ligua'#231#227'o direta e liguaga'#231#227'o indireta de n'#237'vel 1". Lista tab' +
+          'elas da ligua'#231#227'o direta + tabelas filhas.'
+        '3. "Ligua'#231#227'o direta e liguaga'#231#227'o indireta de n'#237'vel 2".'
+        '4. "Ligua'#231#227'o direta e liguaga'#231#227'o indireta de n'#237'vel 3".'
+        'Outro')
+      Properties.OnChange = cbbNiveisJoinPropertiesChange
+      TabOrder = 3
+      Text = '-1. "Todos" (Todas as tabelas filhas ser'#227'o listadas).'
+      OnExit = cbbNiveisJoinExit
+      Width = 489
+    end
+    object edtNivelJoinComSubTabelas: TcxTextEdit
+      Left = 1024
+      Top = 16
+      Hint = 
+        'Busca joins de tabelas filhas.'#13#10#13#10'Definir o n'#237'vel m'#225'ximo.'#13#10#13#10'0 =' +
+        ' Nenhum'
+      TabStop = False
+      Properties.OnChange = edtNivelJoinComSubTabelasPropertiesChange
+      TabOrder = 4
+      Text = '-1'
+      OnExit = edtNivelJoinComSubTabelasExit
+      OnKeyPress = edtNivelJoinComSubTabelasKeyPress
+      Width = 33
+    end
+    object cbbTipoScript: TcxComboBox
+      Left = 96
+      Top = 16
+      Properties.DropDownListStyle = lsEditFixedList
+      Properties.Items.Strings = (
+        '1. Select (Gerar SQL de pesquisa)'
+        '2. View (Gerar vis'#227'o contendo o SQL de pesquisa)')
+      TabOrder = 0
+      Text = '1. Select (Gerar SQL de pesquisa)'
+      Width = 257
     end
   end
   inherited mm: TMainMenu
@@ -493,7 +553,8 @@ inherited FormMainQuery: TFormMainQuery
     end
   end
   inherited actlst: TActionList
-    Top = 88
+    Left = 382
+    Top = 200
     object actGeneretorSQL: TAction
       Caption = 'Gerar script conforme configura'#231#227'o atual'
       OnExecute = actGeneretorSQLExecute
@@ -501,6 +562,13 @@ inherited FormMainQuery: TFormMainQuery
     object actFullScript: TAction
       Caption = 'Gerar todos scripts poss'#237'veis'
       OnExecute = actFullScriptExecute
+    end
+    object actTestaScripts: TAction
+      Caption = 'Testa Scripts'
+      OnExecute = actTestaScriptsExecute
+    end
+    object actAbrirSQLGerados: TAction
+      Caption = 'actAbrirSQLGerados'
     end
   end
 end

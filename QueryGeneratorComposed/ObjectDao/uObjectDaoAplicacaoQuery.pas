@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, uObjectDao, uObjectDaoApplication, DB, DBClient, FMTBcd, Provider, SqlExpr,
-  uDMRTTI, DBXpress, ImgList, Controls;
+  uDMClasses, DBXpress, ImgList, Controls;
 
 type
   TObjectDaoAplicacaoQuery = class(TObjectDaoApplication)
@@ -24,6 +24,6 @@ implementation
 
 initialization
 
-DMRTTI.RegisterClass(TObjectDaoAplicacaoQuery);
+DMClasses.RegisterClass(TObjectDaoAplicacaoQuery);
 
 end.

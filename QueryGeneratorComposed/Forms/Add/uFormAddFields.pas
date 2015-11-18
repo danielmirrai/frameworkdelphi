@@ -8,7 +8,7 @@ uses
   Mask, DBCtrls, Classes, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
   dxSkinsDefaultPainters, Menus, cxPropertiesStore, ActnList, cxButtons,
-  uDMRTTI, cxGroupBox;
+  uDMClasses, cxGroupBox;
 
 type
   TFormAddFields = Class(TFormAddModel)
@@ -33,6 +33,6 @@ begin
 end;
 
 initialization
-  DMRTTI.RegisterClass(TFormAddFields);
+  DMClasses.RegisterClass(TFormAddFields);
 
 end.

@@ -1,0 +1,164 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{35939883-2BAC-479A-859C-E5C799BD8070}</ProjectGuid>
+        <MainSource>ProjectQueryGeneratorComposed.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1025</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>18.0</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
+        <DCC_E>false</DCC_E>
+        <DCC_DcpOutput>lib/D7</DCC_DcpOutput>
+        <DCC_ExeOutput>Win32/Debug/</DCC_ExeOutput>
+        <VerInfo_Locale>1046</VerInfo_Locale>
+        <DCC_BplOutput>lib/D7</DCC_BplOutput>
+        <DCC_DcuOutput>lib/D7/</DCC_DcuOutput>
+        <DCC_UnitSearchPath>../Framework/Lib/D7/;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_S>false</DCC_S>
+        <DCC_UsePackage>vcl;rtl;vclx;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;IndyCore70;IndySystem70;IndyProtocols70;dxCoreD7;dxGDIPlusD7;cxLibraryVCLD7;cxEditorsVCLD7;dxThemeD7;cxDataD7;cxExtEditorsVCLD7;dxmdsD7;dxBarD7;dxBarDBNavD7;dxBarExtDBItemsD7;dxBarExtItemsD7;dxRibbonD7;cxBarEditItemD7;dxdbtrD7;dxtrmdD7;dxDockingD7;dxFlowChartD7;cxPageControlVCLD7;dxLayoutControlD7;dxComnD7;dxMasterViewD7;dxNavBarD7;dxorgcD7;dxdborD7;cxGridD7;cxPivotGridD7;cxPivotGridChartD7;cxPivotGridOLAPD7;cxTreeListD7;cxTreeListdxBarPopupMenuD7;cxSchedulerD7;cxSchedulerGridD7;dxsbD7;dcldxSkinsCoreD7;dxSkinsCoreD7;dxSkinscxPCPainterD7;dxSkinscxScheduler3PainterD7;dxSkinsdxDLPainterD7;dxSkinsdxBarPainterD7;dxSkinsdxNavBar2PainterD7;dxSpellCheckerD7;cxSpreadSheetVCLD7;cxVerticalGridVCLD7;dxPSCoreD7;dxPSLnksD7;dxPScxCommonD7;dxPScxExtCommonD7;dxPScxGrid6LnkD7;dxPScxPivotGrid2LnkD7;dxPScxScheduler3LnkD7;dxPScxSSLnkD7;dxPScxTL5LnkD7;dxPScxVGridLnkD7;dxPSTeeChartD7;dxPSDBTeeChartD7;dxPSdxOCLnkD7;dxPSdxDBOCLnkD7;dxPSdxDBTVLnkD7;dxPSdxFCLnkD7;dxPSdxLC2LnkD7;dxPSdxMVLnkD7;dxPScxPCProdD7;dxPsPrVwAdvD7;dxPSPrVwRibbonD7;dxSkinsdxRibbonPainterD7;dxSkinXmas2008BlueD7;dxSkinBlackD7;dxSkinBlueD7;dxSkinCaramelD7;dxSkinCoffeeD7;dxSkinDarkRoomD7;dxSkinDarkSideD7;dxSkinFoggyD7;dxSkinGlassOceansD7;dxSkiniMaginaryD7;dxSkinLilianD7;dxSkinLiquidSkyD7;dxSkinLondonLiquidSkyD7;dxSkinMcSkinD7;dxSkinMoneyTwinsD7;dxSkinOffice2007BlackD7;dxSkinOffice2007BlueD7;dxSkinOffice2007GreenD7;dxSkinOffice2007PinkD7;dxSkinOffice2007SilverD7;dxSkinOffice2010BlackD7;dxSkinOffice2010BlueD7;dxSkinOffice2010SilverD7;dxSkinPumpkinD7;dxSkinSevenD7;dxSkinSharpD7;dxSkinSilverD7;dxSkinSpringTimeD7;dxSkinStardustD7;dxSkinSummer2008D7;dxSkinValentineD7;D7_Framework;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_K>false</DCC_K>
+        <DCC_F>false</DCC_F>
+        <SanitizedProjectName>ProjectQueryGeneratorComposed</SanitizedProjectName>
+        <DCC_N>true</DCC_N>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <Icon_MainIcon>ProjectQueryGeneratorComposed_Icon.ico</Icon_MainIcon>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Icon_MainIcon>ProjectQueryGeneratorComposed_Icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="Forms\Add\uFormAddFields.pas">
+            <Form>FormAddFields</Form>
+        </DCCReference>
+        <DCCReference Include="Forms\Add\uFormAddReferenceFK.pas">
+            <Form>FormAddReferenceFK</Form>
+        </DCCReference>
+        <DCCReference Include="ObjectDao\uObjectDaoFields.pas">
+            <Form>ObjectDaoFields</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ObjectDao\uObjectDaoReferenceFK.pas">
+            <Form>ObjectDaoReferenceFK</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ObjectAction\uObjectActionFields.pas"/>
+        <DCCReference Include="ObjectAction\uObjectActionReferenceFK.pas"/>
+        <DCCReference Include="Constant\uConstantFields.pas"/>
+        <DCCReference Include="Constant\uConstantReferenceFK.pas"/>
+        <DCCReference Include="ObjectDao\uObjectDaoAplicacaoQuery.pas">
+            <Form>ObjectDaoAplicacaoQuery</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Forms\View\uFormViewFields.pas">
+            <Form>FormViewFields</Form>
+        </DCCReference>
+        <DCCReference Include="Forms\View\uFormViewReferenceFK.pas">
+            <Form>FormViewReferenceFK</Form>
+        </DCCReference>
+        <DCCReference Include="Forms\Model\uFormMainQuery.pas">
+            <Form>FormMainQuery</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">ProjectQueryGeneratorComposed.dpr</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="iOSDevice64">True</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>
