@@ -94,7 +94,10 @@ type
       const pbIgnoreCase: Boolean = true): Integer;
     class function PosAfterIndex(const psLocalizar, psTexto: string;
       const pnIndexBegin: Integer = 1;
-      const pbIgnoreCase: Boolean = true): Integer;
+      const pbIgnoreCase: Boolean = true): Integer; Overload;
+    class function PosAfterIndex(const psLocalizar: Array of String; const psTexto: string;
+      const pnIndexBegin: Integer = 1;
+      const pbIgnoreCase: Boolean = true): Integer; Overload;
     class function StrToInt2(const psValue: string): Integer;
     class function StrToFloat2(const psValue: string): Extended;
     class function CardinalToInt(const psValue: Cardinal): Integer;
@@ -248,12 +251,14 @@ type
     class function GetDirectoryTemp: string;
     class function GetDirectoryTempApp: string;
     class function ExtractFileNameUrl(const psUrl: string): String;
-    class function PosInvert(const psValue, psLocate: String): Integer;
     class function DataSetToStringFormat(const poDataSet: TDataSet): String;
     class procedure StringFormatToDataSet(const poDataSet: TDataSet;
       const psTexto: String);
     class function InvertString(Const psValue: String): String;
+    //Case insensitive
     class function PostInvertString(Const psLocate, psValue: String): Integer;
+    //Case sensitive
+    class function PosInvert(const psValue, psLocate: String): Integer;
     class procedure FreeAplication;
     class function ExtractDrive(const psPath: string): string;
     class procedure MyException(const poSender: TObject); overload;
@@ -280,11 +285,15 @@ type
     class procedure SetRecno(poDataSet: TDataSet; const pnRecno: Integer);
     class function GetValueList(poList: TStringList;
       const pnIndex: Integer): String;
-    class procedure AddIfExistValue(var psValue: String; const psAdd: string;
-      const pbAfterValue: Boolean = true);
+    class procedure AddIfExistValue(var psVariable: String; const psAdd: string;
+      const pbAfterValue: Boolean = true); Overload;
+    class procedure AddIfExistValue(const psVariable: TStringList; const psAdd: string); Overload;
     class function StrToBoolean(const psStr: String): Boolean;
     class function BooleanToStr(const pbValor: Boolean): String;
-    class procedure AssignStringList(poListDest, poListOrigem: TStringList; const pbClearOldValue: Boolean);
+    class procedure AssignStringList(var poListDest: TStringList; const poListOrigem: TStringList; const pbClearOldValue: Boolean);
+    class function StringReplace2(const S: string; const OldPattern, NewPattern: array of string;
+        Flags: TReplaceFlags): string; overload;
+    class procedure DelimiterMaxLengthLine(const poList: TStringList; const poValueDelimiter: array of string; const pnLengthMax: Integer = 200);
   end;
 
 var
@@ -293,7 +302,7 @@ var
 implementation
 
 uses uDMUtilsMessage, uDMCript, uDMException, uObjectActionTimeExecuting,
-  uDMThreadUtils, uFactoryObject;
+  uDMThreadUtils, uDMClasses, uFactoryObject;
 
 { TDMUtils }
 
@@ -537,7 +546,6 @@ begin
 
   for nIndex := poList.Count - nCST_One downto nCST_Zero do
   begin
-    poList.Strings[nIndex] := Trim(poList.Strings[nIndex]);
     if TDMUtils.IsEmpty(poList.Strings[nIndex]) then
       poList.Delete(nIndex);
   end;
@@ -2113,19 +2121,19 @@ begin {
     TDMUtils.DestroyObject(Stacklist) }
 end;
 
-class procedure TDMUtils.AddIfExistValue(var psValue: String;
+class procedure TDMUtils.AddIfExistValue(var psVariable: String;
   const psAdd: string; const pbAfterValue: Boolean = true);
 begin
-  if TDMUtils.ExistValue(psValue) then
+  if TDMUtils.ExistValue(psVariable) then
   begin
     if pbAfterValue then
-      psValue := psValue + psAdd
+      psVariable := psVariable + psAdd
     else
-      psValue := psAdd + psValue;
+      psVariable := psAdd + psVariable;
   end;
 end;
 
-class procedure TDMUtils.AssignStringList(poListDest, poListOrigem: TStringList; const pbClearOldValue: Boolean);
+class procedure TDMUtils.AssignStringList(var poListDest: TStringList; const poListOrigem: TStringList; const pbClearOldValue: Boolean);
 begin
   if (not Assigned(poListOrigem)) then
   begin
@@ -2235,7 +2243,7 @@ begin
       UpperCase(Copy(psTexto, pnIndexBegin, Length(psTexto))))
   else
     Result := Pos(psLocalizar, Copy(psTexto, pnIndexBegin, Length(psTexto)));
-  if TDMUtils.ExistValue(Result) then
+  if (Result > 0) then
     Result := Result + pnIndexBegin;
 end;
 
@@ -2421,8 +2429,85 @@ begin
   Result := not TDMUtils.IsEmpty(poValue);
 end;
 
+class function TDMUtils.StringReplace2(const S: string; const OldPattern,
+  NewPattern: array of string; Flags: TReplaceFlags): string;
+var
+  i: Integer;
+begin
+  for i := 0 to Length(OldPattern) - 1 do
+  begin
+    Result := stringReplace(S, OldPattern[i], NewPattern[i], Flags);
+  end;
+end;
+
+class procedure TDMUtils.AddIfExistValue(const psVariable: TStringList;
+  const psAdd: string);
+begin
+  if Assigned(psVariable) and ExistValue(psAdd) then
+    psVariable.Add(psAdd);
+end;
+
+class procedure TDMUtils.DelimiterMaxLengthLine(const poList: TStringList; const poValueDelimiter: array of string; const pnLengthMax: Integer);
+var
+  nColunasVoltar, nIndexFinal, i, nLengthCurrent, nNewIndex: Integer;
+  sText: String;
+begin
+  if not Assigned(poList) then
+    Exit;
+
+  for i := poList.Count -1 downto 0 do
+  begin
+    sText := poList.Strings[i];
+    nLengthCurrent := Length(sText);
+    if (nLengthCurrent <= pnLengthMax) then
+      Continue;
+
+    nNewIndex :=  i;
+    while TDMUtils.ExistValue(sText) do
+    begin
+      nColunasVoltar := trunc((pnLengthMax / 10));
+      nIndexFinal := TDMUtils.PosAfterIndex(poValueDelimiter, sText, pnLengthMax - nColunasVoltar);
+      if (nIndexFinal > 0) then
+      begin
+        if (nNewIndex <> i) then
+          poList.Insert(nNewIndex, Copy(sText, 1, nIndexFinal - 1))
+        else
+          poList.Strings[nNewIndex] := Copy(sText, 1, nIndexFinal - 1);
+
+        sText := Copy(sText, nIndexFinal, Length(sText));
+        inc(nNewIndex);
+      end
+      else
+      begin
+        if (nNewIndex <> i) then
+        begin
+          poList.Insert(nNewIndex, Copy(sText, 1, Length(sText)));
+          nNewIndex := i;
+        end;
+
+        sText := EmptyStr;
+      end;
+    end;
+  end;
+end;
+
+class function TDMUtils.PosAfterIndex(const psLocalizar: array of String;
+  const psTexto: string; const pnIndexBegin: Integer;
+  const pbIgnoreCase: Boolean): Integer;
+var
+  i, IndexAtual: Integer;
+begin
+  Result := 0;
+  for i := 0 to Length(psLocalizar) -1 do
+  begin
+    IndexAtual := PosAfterIndex(psLocalizar[i], psTexto, pnIndexBegin, pbIgnoreCase);
+    if ((Result = 0) or ((IndexAtual > 0) and (IndexAtual < Result))) then
+      Result := IndexAtual;
+  end;
+end;
+
 initialization
 
-RegisterClass(TDMUtils);
+DMClasses.RegisterClass(TDMUtils);
 
 end.

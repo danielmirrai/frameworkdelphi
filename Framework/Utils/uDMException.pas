@@ -32,7 +32,6 @@ type
     class procedure TreatException; Overload;
     class procedure TreatException(const psMessage: string); Overload;
     class function Aborting: Boolean;
-
   end;
 
 const

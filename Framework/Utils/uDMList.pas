@@ -48,7 +48,7 @@ type
 
 implementation
 
-uses MD5, uDMUtils, uFactoryObject;
+uses MD5, uDMUtils, uFactoryObject, SysUtils;
 { TListOfStringList }
 
 function TListOfStringList.Add: TStringList;
@@ -70,7 +70,12 @@ var
   vNewList: TStringList;
 begin
   vNewList := TStringList.Create;
-  vNewList.Text := aText;
+  try
+    vNewList.Text := aText;
+  except
+    FreeAndNil(vNewList);
+    raise;
+  end;
   Result := Add(vNewList);
 end;
 
@@ -83,6 +88,7 @@ procedure TListOfStringList.Assign(Source: TObject; const pbClearOldValue: Boole
 var
   nIndex: Integer;
   oItem: TListOfStringList;
+  oStringListTemp: TStringList;
 begin
   if not(Assigned(Source) and (Source is TListOfStringList)) then
     Exit;
@@ -102,7 +108,11 @@ begin
     for nIndex := 0 to oItem.count - 1 do
     begin
       if Assigned(Self.Items[nIndex]) then
-       TDMUtils.AssignStringList(Self.Items[nIndex], oItem.Items[nIndex], pbClearOldValue);
+      begin
+        oStringListTemp := Self.Items[nIndex];
+        TDMUtils.AssignStringList(oStringListTemp, oItem.Items[nIndex], pbClearOldValue);
+        Self.Items[nIndex] := oStringListTemp;
+      end;
     end;
   end;
 end;

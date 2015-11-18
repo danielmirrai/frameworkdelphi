@@ -79,8 +79,8 @@ uses uDMUtils, uDMCript;
 procedure TDMRegistry.AfterConstruction;
 begin
   inherited;
-  FKey := '\Software\Mirrai\Data\';
-  FFilename := 'FONT';
+  FKey := '';
+  FFilename := '';
   RootKey := HKEY_CURRENT_USER;
   FKeyIsOpen := False;
   FActiveCript := False;

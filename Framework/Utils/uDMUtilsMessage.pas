@@ -21,8 +21,6 @@ uses
 
 type
   TDMUtilsMessage = class
-  private
-
   public
     class procedure ShowMessageOk(const psMessage: string);
     class procedure ShowMessageError(const psMessage: string);
