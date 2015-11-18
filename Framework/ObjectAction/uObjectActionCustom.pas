@@ -15,7 +15,7 @@ unit uObjectActionCustom;
 interface
 
 uses
-  uObjectDaoCustom, Classes, Contnrs, SysUtils;
+  uDMClasses, uObjectDaoCustom, Classes, Contnrs, SysUtils;
 
 type
   TObjectActionCustom = class;
@@ -387,6 +387,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectActionCustom);
+DMClasses.RegisterClass(TObjectActionCustom);
 
 end.

@@ -4,10 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes,
-  uDMUtilsdao, Graphics, Controls, uObjectAction, Forms, DB, DBClient, Dialogs,
+  uDMClasses, uDMUtilsdao, Graphics, Controls, uObjectAction, Forms, DB, DBClient, Dialogs,
   StdCtrls, Mask, DBCtrls, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, Menus, cxButtons, cxControls, cxContainer, cxEdit,
-  dxSkinsCore, dxSkinBlack, cxTextEdit, cxDBEdit;
+  dxSkinsCore, dxSkinBlack, cxTextEdit, cxDBEdit, dxSkinsDefaultPainters;
 
 type
   TFrameLookupModel = class(TFrame)
@@ -353,5 +353,5 @@ begin
 end;
 
 initialization
-RegisterClass(TFrameLookupModel);
+DMClasses.RegisterClass(TFrameLookupModel);
 end.

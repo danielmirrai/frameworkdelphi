@@ -17,13 +17,21 @@ interface
 
 uses
   Classes, Controls, Forms, uFormViewModelCustom, SysUtils, uObjectAction, ActnList, uFormAddModel, DB,
-  Dialogs, Contnrs, ExtCtrls, StdCtrls, Grids, DBGrids,  Menus, cxGraphics,
+  uDMClasses, Dialogs, Contnrs, ExtCtrls, StdCtrls, Grids, DBGrids,  Menus, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, dxSkinBlack, cxStyles, dxSkinscxPCPainter, cxCustomData,
   cxFilter, cxData, cxDataStorage, cxDBData, cxGridCustomPopupMenu,
   cxGridPopupMenu, cxButtons, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  cxGroupBox;
+  cxGroupBox, cxPropertiesStore, dxSkinsDefaultPainters, dxSkinBlue,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue, uObjectDaoApplication;
 
 type
   TFormViewModel = class;
@@ -59,12 +67,12 @@ type
     procedure ac_AddExecute(Sender: TObject);
     procedure ac_EditExecute(Sender: TObject);
     procedure ac_DeleteExecute(Sender: TObject);
-    procedure GridDblClick(Sender: TObject);
     procedure dsDadosStateChange(Sender: TObject);
     procedure dsDadosDataChange(Sender: TObject; Field: TField);
     procedure dsDadosUpdateData(Sender: TObject);
     procedure ac_DeleteAllExecute(Sender: TObject);
     procedure ac_SelectItemExecute(Sender: TObject);
+    procedure cxDBTableGridViewDblClick(Sender: TObject);
   private
     FFormViewOwner: TFormViewModel;
     FListFormViewChildren: TListFormView;
@@ -73,6 +81,7 @@ type
     FCanCreateFormAddModel: Boolean;
   protected
 
+    procedure Edit; virtual;
     function GetNewListFormViewChildren: TListFormViewModelCustom; Override;
     function GetListFormViewChildren: TListFormView; reintroduce; virtual;
     procedure SetListFormViewChildren(const Value: TListFormView); reintroduce; virtual;
@@ -165,8 +174,7 @@ end;
 procedure TFormViewModel.ac_EditExecute(Sender: TObject);
 begin
   inherited;
-  FFormAddModel.FObjectAction.Edit;
-  FFormAddModel.ShowModal;
+  Edit;
 end;
 
 procedure TFormViewModel.ac_SelectItemExecute(Sender: TObject);
@@ -292,15 +300,6 @@ begin
   Result := FSelectModel;
 end;
 
-procedure TFormViewModel.GridDblClick(Sender: TObject);
-begin
-  inherited;
-  if ac_SelectItem.Enabled then
-    ac_SelectItem.Execute
-  else
-    ac_Edit.Execute;
-end;
-
 procedure TFormViewModel.Refresh;
 begin
   inherited;
@@ -345,6 +344,12 @@ begin
     btn_Select.Width := 105;
 end;
 
+procedure TFormViewModel.Edit;
+begin
+  FFormAddModel.FObjectAction.Edit;
+  FFormAddModel.ShowModal;
+end;
+
 { TListFormView }
 
 function TListFormView.Add(poClassFormViewModel: TClassFormViewModel;
@@ -371,8 +376,16 @@ begin
   inherited Items[Index] := Value;
 end;
 
-initialization
+procedure TFormViewModel.cxDBTableGridViewDblClick(Sender: TObject);
+begin
+  inherited;
+  if ac_SelectItem.Enabled then
+    ac_SelectItem.Execute
+  else
+    ac_Edit.Execute;
+end;
 
-RegisterClass(TFormViewModel);
+initialization
+ DMClasses.RegisterClass(TFormViewModel);
 
 end.

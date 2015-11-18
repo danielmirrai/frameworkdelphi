@@ -16,7 +16,7 @@ unit uFormModelCustom;
 interface
 
 uses
-  Classes, Controls, Forms;
+  uDMClasses, Classes, Controls, Forms;
 
 type
   TFormModelCustom = class(TForm)
@@ -93,6 +93,6 @@ end;
 
 initialization
 
-RegisterClass(TFormModelCustom);
+DMClasses.RegisterClass(TFormModelCustom);
 
 end.

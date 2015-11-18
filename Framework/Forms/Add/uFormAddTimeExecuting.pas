@@ -4,12 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Graphics, Controls, Forms,
-  uConstantTimeExecuting,
+  uDMClasses, uConstantTimeExecuting,
   Dialogs, uFormAddModel, uObjectActionTimeExecuting, StdCtrls, Mask,
   DBCtrls, DB, Classes, ActnList, ExtCtrls,
   uObjectAction, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
-  Menus, cxTextEdit, cxDBEdit, cxButtons, cxGroupBox;
+  Menus, cxTextEdit, cxDBEdit, cxButtons, cxGroupBox, cxPropertiesStore,
+  dxSkinsDefaultPainters;
 
 type
   TFormAddTimeExecuting = Class(TFormAddModel)
@@ -53,6 +54,6 @@ end;
 
 initialization
 
-RegisterClass(TFormAddTimeExecuting);
+DMClasses.RegisterClass(TFormAddTimeExecuting);
 
 end.

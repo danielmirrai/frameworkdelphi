@@ -19,7 +19,7 @@ unit uFormAddModel;
 interface
 
 uses
-  Classes, Controls, Forms, Dialogs,
+  uDMClasses, Classes, Controls, Forms, Dialogs,
   Contnrs, uFormAddModelCustom, uObjectAction, SysUtils,
   Menus, StdCtrls, DB, ActnList, Buttons, ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
@@ -313,6 +313,6 @@ end;
 
 initialization
 
-RegisterClass(TFormAddModel);
+DMClasses.RegisterClass(TFormAddModel);
 
 end.

@@ -15,7 +15,7 @@ unit uObjectDaoCustom;
 interface
 
 uses
-  Classes, DB, DBClient, MidasLib, uDMUtils, uDMUtilsDao, FMTBcd, SqlExpr,
+  uDMClasses, Classes, DB, DBClient, MidasLib, uDMUtils, uDMUtilsDao, FMTBcd, SqlExpr,
   Provider, Contnrs;
 
 type
@@ -495,7 +495,7 @@ begin
   if not ActiveAutoGenetorID then
     Exit;
   oField := GetFieldID;
-  if Assigned(oField) then
+  if Assigned(oField) and (oField.DataType in [ftInteger, ftSmallInt])  then
     oField.AsInteger := IncAutoIncrement;
 end;
 
@@ -568,6 +568,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectDaoCustom);
+DMClasses.RegisterClass(TObjectDaoCustom);
 
 end.

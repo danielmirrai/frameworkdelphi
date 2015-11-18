@@ -1,6 +1,6 @@
 inherited FormGridCustom: TFormGridCustom
-  Left = 459
-  Top = 234
+  Left = 315
+  Top = 185
   Caption = 'View Model'
   ClientHeight = 336
   ClientWidth = 793
@@ -17,10 +17,18 @@ inherited FormGridCustom: TFormGridCustom
       Align = alClient
       TabOrder = 0
       object cxDBTableGridView: TcxGridDBTableView
+        PopupMenu = pmGrid
         NavigatorButtons.ConfirmDelete = False
+        DataController.DataSource = dsDados
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        FilterRow.Visible = True
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
       end
       object cxLevelGridViewLevel1: TcxGridLevel
         GridView = cxDBTableGridView

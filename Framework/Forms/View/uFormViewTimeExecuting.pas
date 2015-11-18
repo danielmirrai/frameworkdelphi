@@ -4,11 +4,17 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  uConstantTimeExecuting,
+  uDMClasses, uConstantTimeExecuting,
   Dialogs, uFormViewModel, uFormAddTimeExecuting, DB,
 
   ActnList, StdCtrls, Grids, DBGrids, ExtCtrls,
-  Menus;
+  Menus, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, dxSkinsCore, dxSkinBlack, dxSkinsDefaultPainters,
+  cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxDBData, cxPropertiesStore, cxGridCustomPopupMenu,
+  cxGridPopupMenu, cxButtons, cxGridLevel, cxClasses, cxGridCustomView,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
+  cxGroupBox;
 
 type
   TFormViewTimeExecuting = class(TFormViewModel)
@@ -31,6 +37,6 @@ end;
 
 initialization
 
-RegisterClass(TFormViewTimeExecuting);
+DMClasses.RegisterClass(TFormViewTimeExecuting);
 
 end.

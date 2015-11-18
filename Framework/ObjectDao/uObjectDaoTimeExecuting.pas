@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, uObjectDao, DB, DBClient,
-  uDMUtils, FMTBcd, Dialogs,
+  uDMClasses, uDMUtils, FMTBcd, Dialogs,
   Provider, SqlExpr;
 
 type
@@ -38,7 +38,7 @@ type
 
 implementation
 
-{ %CLASSGROUP 'Vcl.Controls.TControl' }
+{ %CLASSGROUP 'Controls.TControl' }
 
 uses uObjectDaoApplication;
 
@@ -63,6 +63,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectDaoTimeExecuting);
+DMClasses.RegisterClass(TObjectDaoTimeExecuting);
 
 end.

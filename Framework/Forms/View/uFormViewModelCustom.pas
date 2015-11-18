@@ -18,13 +18,21 @@ interface
 uses
   Classes, Controls, Forms, DB, uFormAddModelCustom, uFormGrid, StdCtrls,
   SysUtils, uObjectDaoApplication,
-   Contnrs, ActnList, Grids, DBGrids, ExtCtrls, Menus, cxGraphics,
+  uDMClasses, Contnrs, ActnList, Grids, ExtCtrls, Menus, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, dxSkinBlack, cxStyles, dxSkinscxPCPainter, cxCustomData,
   cxFilter, cxData, cxDataStorage, cxDBData, cxGridCustomPopupMenu,
   cxGridPopupMenu, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  cxGroupBox, cxButtons;
+  cxGroupBox, cxButtons, dxSkinsDefaultPainters, cxPropertiesStore,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TFormViewModelCustom = class;
@@ -53,7 +61,6 @@ type
   TFormViewModelCustom = class(TFormGrid)
     ac_OpenView: TAction;
     btn_Close: TcxButton;
-    cxGroupBox1: TcxGroupBox;
     procedure ac_OpenViewExecute(Sender: TObject);
   private
     FListFormViewChildren: TListFormViewModelCustom;
@@ -221,6 +228,6 @@ end;
 
 initialization
 
-RegisterClass(TFormViewModelCustom);
+DMClasses.RegisterClass(TFormViewModelCustom);
 
 end.

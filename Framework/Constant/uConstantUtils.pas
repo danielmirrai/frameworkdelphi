@@ -50,7 +50,7 @@ resourcestring
   sCST_FormatDate = 'dd/mm/yyyy';
   sCST_ErrorIn = 'Error in ';
   sCST_ErroExecutingFile = 'Error executing file!';
-  sCST_NameProject = 'WicTalk Messager';
+  sCST_NameProject = 'Aplicação';
   sCST_Alert = 'Alert';
   sCST_Error = 'Error';
   sCST_Information = 'Information';

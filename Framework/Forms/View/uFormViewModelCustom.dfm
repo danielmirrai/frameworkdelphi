@@ -9,14 +9,6 @@ inherited FormViewModelCustom: TFormViewModelCustom
     inherited cxgridView: TcxGrid
       Height = 295
     end
-    object cxGroupBox1: TcxGroupBox
-      Left = 448
-      Top = 112
-      Caption = 'cxGroupBox1'
-      TabOrder = 1
-      Height = 105
-      Width = 185
-    end
   end
   object gb_Navegate: TcxGroupBox [1]
     Left = 0

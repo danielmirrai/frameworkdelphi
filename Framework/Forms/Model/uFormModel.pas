@@ -16,7 +16,7 @@ unit uFormModel;
 interface
 
 uses
-  Messages, Classes, Controls, Forms,
+  uDMClasses, Messages, Classes, Controls, Forms,
   uFormModelCustom, ActnList, StdCtrls, ExtCtrls,
   Mask, DBCtrls, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
@@ -93,6 +93,6 @@ end;
 
 initialization
 
-RegisterClass(TFormModel);
+DMClasses.RegisterClass(TFormModel);
 
 end.

@@ -16,9 +16,9 @@ unit uFormGridCustom;
 interface
 
 uses
-  Classes, Controls, Forms, uDMUtilsdao,
+  uDMClasses, Classes, Controls, Forms, uDMUtilsdao,
   uFormModel,
-  DB, ActnList, StdCtrls, Grids, DBGrids,
+  DB, ActnList, StdCtrls, Grids,
   ExtCtrls, Menus, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
   cxGroupBox, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
@@ -98,15 +98,19 @@ begin
 end;
 
 procedure TFormGridCustom.CreateColumns;
-{var
+var
   nIndex: Integer;
-}begin
- { cxDBTableGridView.Columns.RebuildColumns;
-  for nIndex := 0 to Grid.Columns.Count - 1 do
+begin                         
+  if TDMUtils.IsEmpty(cxDBTableGridView.ColumnCount) then
   begin
-    if Grid.Columns[nIndex].Width > 100 then
-      Grid.Columns[nIndex].Width := 100;
-  end;    }
+    cxDBTableGridView.DataController.CreateAllItems();
+
+    for nIndex := 0 to cxDBTableGridView.ColumnCount - 1 do
+    begin
+      if cxDBTableGridView.Columns[nIndex].Width > 100 then
+        cxDBTableGridView.Columns[nIndex].Width := 100;
+    end;
+  end;
   DefinePropertiesStore;
 end;
 
@@ -120,7 +124,6 @@ begin
   try
     vView := cxDBTableGridView;
 
-    //  vView Grid.Levels.GridView.
     for vIndex := 0 to vView.ColumnCount - 1 do
     begin
       vComponent := TcxPropertiesStoreComponent(cxPropertiesStore.Components.Add);
@@ -140,11 +143,11 @@ end;
 
 procedure TFormGridCustom.FooterGrid;
 begin
-  // vItem := GridDBTableView_Dados.DataController.Summary.FooterSummaryItems[0];
+  //vItem := GridDBTableView_Dados.DataController.Summary.FooterSummaryItems[0];
 end;
 
 initialization
 
-RegisterClass(TFormGridCustom);
+DMClasses.RegisterClass(TFormGridCustom);
 
 end.

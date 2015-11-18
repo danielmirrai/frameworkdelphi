@@ -15,7 +15,7 @@ unit uObjectDao;
 interface
 
 uses
-  Classes, Contnrs, uObjectDaoCustom, DB, DBClient, MidasLib, SysUtils,
+  uDMClasses, Classes, Contnrs, uObjectDaoCustom, DB, DBClient, MidasLib, SysUtils,
   TypInfo, FMTBcd, uDMException, Dialogs,
   Provider, SqlExpr;
 
@@ -575,6 +575,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectDao);
+DMClasses.RegisterClass(TObjectDao);
 
 end.

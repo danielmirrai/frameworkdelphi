@@ -15,7 +15,7 @@ unit uObjectDaoApplication;
 interface
 
 uses
-  Classes, MidasLib,  Controls, DB, SqlExpr, DBXpress, ImgList;
+  uDMClasses, DBXpress, DB, SqlExpr, Classes, ImgList, Controls, MidasLib;
 
 type
   TObjectDaoApplication = class(TDataModule)
@@ -26,7 +26,7 @@ type
   private
     { Private declarations }
   protected
-    function ExtractFilePathConfig: string; virtual;  
+    function ExtractFilePathConfig: string; virtual;
     procedure ExportConfigurationDB;
     procedure ImportConfigurationDB;
   public
@@ -38,7 +38,8 @@ var
 
 implementation
 
-uses IniFiles, SysUtils, uDMUtils, Forms;
+uses
+  IniFiles, SysUtils, uDMUtils, Forms;
 
 const
   sCST_DriverName = 'DriverName';
@@ -51,21 +52,28 @@ const
 
 procedure TObjectDaoApplication.DataModuleCreate(Sender: TObject);
 begin
-  inherited;      
+  inherited;
   ImportConfigurationDB;
 end;
 
 procedure TObjectDaoApplication.ImportConfigurationDB;
-var  
+var
   oIniFileConfig: TIniFile;
+  sFilePathConfig: string;
 begin
-  oIniFileConfig := TIniFile.Create(ExtractFilePathConfig);
+  sFilePathConfig := ExtractFilePathConfig;
+  if not FileExists(sFilePathConfig) then
+  begin
+    ExportConfigurationDB;
+    raise Exception.Create('Os dados de conexão não foram configurados.' + #13 + sFilePathConfig);
+  end;
+  oIniFileConfig := TIniFile.Create(sFilePathConfig);
   try
     try
       FBConnection.Close;
       FBConnection.Params.Clear;
       FBConnection.Params.Add(sCST_Database + '=' + oIniFileConfig.ReadString(sCST_ConexaoDB, sCST_Database, ''));
-                             
+
       FBConnection.Params.Add('RoleName=RoleName');
       FBConnection.Params.Add(sCST_User_Name + '=' + oIniFileConfig.ReadString(sCST_ConexaoDB, sCST_User_Name, ''));
       FBConnection.Params.Add(sCST_Password + '=' + oIniFileConfig.ReadString(sCST_ConexaoDB, sCST_Password, ''));
@@ -81,7 +89,7 @@ begin
       FBConnection.Params.Add('WaitOnLocks=True');
       FBConnection.Params.Add('Interbase TransIsolation=ReadCommited');
       FBConnection.Params.Add('Trim Char=False');
-      FBConnection.ParamsLoaded := False;   
+      FBConnection.ParamsLoaded := False;
       FBConnection.Connected := True;
     except
       on e: Exception do
@@ -98,7 +106,7 @@ begin
 end;
 
 procedure TObjectDaoApplication.ExportConfigurationDB;
-var  
+var
   oIniFileConfig: TIniFile;
   ValorLinha: TStringList;
   i: Integer;
@@ -112,21 +120,19 @@ begin
       begin
         ValorLinha.Text := FBConnection.Params.Strings[i];
         TDMUtils.ExplodeStr(ValorLinha, '=');
-        oIniFileConfig.WriteString(sCST_ConexaoDB, TDMUtils.GetValueList(ValorLinha, 0),
-          TDMUtils.GetValueList(ValorLinha, 1));
+        oIniFileConfig.WriteString(sCST_ConexaoDB, TDMUtils.GetValueList(ValorLinha, 0), TDMUtils.GetValueList(ValorLinha, 1));
       end;
     except
       on e: Exception do
         TDMUtils.MyException('Não foi possível conectar com a base!', True);
     end;
   finally
-    FreeAndNil(oIniFileConfig);   
+    FreeAndNil(oIniFileConfig);
     FreeAndNil(ValorLinha);
   end;
 end;
 
 initialization
-
-RegisterClass(TObjectDaoApplication);
+  DMClasses.RegisterClass(TObjectDaoApplication);
 
 end.

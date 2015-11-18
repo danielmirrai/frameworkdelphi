@@ -17,7 +17,7 @@ unit uObjectAction;
 interface
 
 uses
-  uObjectActionCustom, Classes, uObjectDao, SysUtils, DB,
+  uDMClasses, uObjectActionCustom, Classes, uObjectDao, SysUtils, DB,
   uDMUtilsDao, DBClient, Contnrs, uConstantUtils, Variants;
 
 type
@@ -239,7 +239,8 @@ end;
 procedure TObjectAction.Clear;
 begin
   inherited;
-  FObjectDao.Clear;
+  if Assigned(FObjectDao) then
+    FObjectDao.Clear;
 end;
 
 function TObjectAction.ConfigureMasterSource(poObjectAction: TObjectAction; const pbRecursive: boolean): Boolean;
@@ -557,6 +558,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectAction);
+DMClasses.RegisterClass(TObjectAction);
 
 end.

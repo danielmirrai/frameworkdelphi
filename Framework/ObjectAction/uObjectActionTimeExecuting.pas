@@ -18,7 +18,7 @@ interface
 uses
   uObjectAction, Classes, Forms, SysUtils, uConstantTimeExecuting,
   TypInfo,
-  uConstantUtils, uDMUtils, uObjectDaoTimeExecuting;
+  uDMClasses, uConstantUtils, uDMUtils, uObjectDaoTimeExecuting;
 
 type
   TClassObject = class of TObject;
@@ -128,6 +128,6 @@ end;
 
 initialization
 
-RegisterClass(TObjectActionTimeExecuting);
+DMClasses.RegisterClass(TObjectActionTimeExecuting);
 
 end.

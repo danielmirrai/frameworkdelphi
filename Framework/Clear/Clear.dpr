@@ -1,7 +1,7 @@
 program Clear;
 
 uses
-  Forms, FileCtrl, uConstantUtils, Dialogs, WIndows, SysUtils, uDMUtils;
+  Forms, FileCtrl, Dialogs, uConstantUtils, WIndows, SysUtils, uDMUtils;
 
 {$R *.res}
 

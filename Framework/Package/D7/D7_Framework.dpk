@@ -11,12 +11,12 @@ package D7_Framework;
 {$LOCALSYMBOLS ON}
 {$LONGSTRINGS ON}
 {$OPENSTRINGS ON}
-{$OPTIMIZATION ON}
+{$OPTIMIZATION OFF}
 {$OVERFLOWCHECKS OFF}
 {$RANGECHECKS OFF}
 {$REFERENCEINFO ON}
 {$SAFEDIVIDE OFF}
-{$STACKFRAMES OFF}
+{$STACKFRAMES ON}
 {$TYPEDADDRESS OFF}
 {$VARSTRINGCHECKS ON}
 {$WRITEABLECONST OFF}
@@ -25,6 +25,7 @@ package D7_Framework;
 {$DESCRIPTION 'Mirrai Framework for Delphi MVP'}
 {$LIBVERSION '1.0'}
 {$IMPLICITBUILD OFF}
+{$DEFINE DEBUG}
 
 requires
   rtl,
@@ -99,7 +100,7 @@ requires
 
 contains
   MidasLib,
-  MD5 in '..\..\Utils\MD5.pas',
+  uDMClasses in '..\..\Utils\uDMClasses.pas',
   uDMCript in '..\..\Utils\uDMCript.pas',
   uDMException in '..\..\Utils\uDMException.pas',
   uDMFileInfoUtils in '..\..\Utils\uDMFileInfoUtils.pas',
@@ -136,6 +137,10 @@ contains
   uFormViewTimeExecuting in '..\..\Forms\View\uFormViewTimeExecuting.pas' {FormViewTimeExecuting},
   uFormAddTimeExecuting in '..\..\Forms\Add\uFormAddTimeExecuting.pas' {FormAddTimeExecuting},
   uFrameLookupModel in '..\..\Forms\Model\uFrameLookupModel.pas' {FrameLookupModel: TFrame},
-  uFrameworkRegister in '..\..\Utils\uFrameworkRegister.pas';
+  uFrameworkRegister in '..\..\Utils\uFrameworkRegister.pas',
+  uFormMain in '..\..\Forms\Model\uFormMain.pas' {FormMain},
+  SevenZipVCL in '..\..\Utils\Terceiros\SevenZipVCL.pas',
+  md5 in '..\..\Utils\Terceiros\MD5.pas',
+  uDMString in '..\..\Utils\uDMString.pas';
 
 end.

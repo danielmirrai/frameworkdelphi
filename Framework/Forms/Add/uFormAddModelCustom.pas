@@ -17,7 +17,7 @@ interface
 uses
   ActnList,
   Classes, Controls, SysUtils, Forms, uFormModel, uObjectActionCustom,
-  DB,
+  uDMClasses, DB,
   ExtCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
   cxContainer, cxEdit, dxSkinsCore, dxSkinBlack, cxGroupBox, dxSkinBlue,
   dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinFoggy,
@@ -150,6 +150,6 @@ end;
 
 initialization
 
-RegisterClass(TFormAddModelCustom);
+DMClasses.RegisterClass(TFormAddModelCustom);
 
 end.
